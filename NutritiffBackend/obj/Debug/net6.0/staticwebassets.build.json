@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "CpbrWBo9e0amjLVSZmaUAV8QMlIgFFyEzN6fhL3GCVo=",
+  "Source": "NutritiffBackend",
+  "BasePath": "_content/NutritiffBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
