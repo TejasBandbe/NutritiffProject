@@ -63,7 +63,7 @@ namespace NutritiffBackend.Controllers
                         };
 
             var results = query.ToList();
-            return (IEnumerable<OrdersToDisplay>)results;
+            return results;
         }
 
         //4
@@ -144,6 +144,173 @@ namespace NutritiffBackend.Controllers
                 return new ActionResult<Tiffin>(tiffinToUpdate);
             }
             else { return NotFound(); }
+        }
+
+        //10
+        [HttpPost("getvendorbyid")]
+        public ActionResult<Vendor> GetVendorById([FromBody] int vendorId)
+        {
+            var vendor = _context.Vendors.FirstOrDefault(
+                v => v.VendorId == vendorId);
+            if (vendor != null)
+            {
+                return new ActionResult<Vendor>(vendor);
+            }
+            else
+            { return NotFound(); }
+        }
+
+        //11
+        [HttpPatch("updateprofile")]
+        public ActionResult<Vendor> UpdateProfile([FromBody] Vendor vendor)
+        {
+            var vendorToUpdate = _context.Vendors.FirstOrDefault(
+                v => v.VendorId == vendor.VendorId);
+            if(vendorToUpdate != null)
+            {
+                vendorToUpdate.Name = vendor.Name;
+                vendorToUpdate.Address = vendor.Address;
+                vendorToUpdate.Pincode = vendor.Pincode;
+                vendorToUpdate.Email = vendor.Email;
+                vendorToUpdate.MobNo = vendor.MobNo;
+                _context.SaveChanges();
+                return new ActionResult<Vendor>(vendorToUpdate);
+            }
+            else { return NotFound(); }
+        }
+
+        //12
+        [HttpPatch("changepassword")]
+        public ActionResult<Vendor> ChangePassword(int vendorId, [FromBody] String password)
+        {
+            var vendor = _context.Vendors.FirstOrDefault(
+                v => v.VendorId == vendorId);
+            if(vendor != null )
+            {
+                vendor.Password = password;
+                _context.SaveChanges();
+                return new ActionResult<Vendor>(vendor);
+            }
+            else { return NotFound(); }
+        }
+
+        //13
+        [HttpPost("showfeedbacks")]
+        public IEnumerable<FeedbacksToDisplay> ShowFeedbacks(int vendorId)
+        {
+            var query = from feedbackComplaint in _context.FeedbackComplaints
+                        join customer in _context.Customers on feedbackComplaint.CustomerId equals customer.CustomerId
+                        join tiffin in _context.Tiffins on feedbackComplaint.TiffinId equals tiffin.TiffinId
+                        join vendor in _context.Vendors on tiffin.VendorId equals vendor.VendorId
+                        where vendor.VendorId == vendorId
+                        select new FeedbacksToDisplay
+                        {
+                            FcId = feedbackComplaint.FcId,
+                            CustomerName = customer.Name,
+                            tiffinName = tiffin.TiffinName,
+                            FeedbackCategory = feedbackComplaint.Category,
+                            FeedbackDescription = feedbackComplaint.Description,
+                            FeedbackStatus = feedbackComplaint.Status
+                        };
+            var result = query.ToList();
+            return result;
+        }
+
+        //14
+        [HttpPost("showunderreviewfeedbacks")]
+        public IEnumerable<FeedbacksToDisplay> ShowUnderReviewFeedbacks(int vendorId)
+        {
+            var query = from feedbackComplaint in _context.FeedbackComplaints
+                        join customer in _context.Customers on feedbackComplaint.CustomerId equals customer.CustomerId
+                        join tiffin in _context.Tiffins on feedbackComplaint.TiffinId equals tiffin.TiffinId
+                        join vendor in _context.Vendors on tiffin.VendorId equals vendor.VendorId
+                        where vendor.VendorId == vendorId && feedbackComplaint.Status == "under review"
+                        select new FeedbacksToDisplay
+                        {
+                            FcId = feedbackComplaint.FcId,
+                            CustomerName = customer.Name,
+                            tiffinName = tiffin.TiffinName,
+                            FeedbackCategory = feedbackComplaint.Category,
+                            FeedbackDescription = feedbackComplaint.Description,
+                            FeedbackStatus = feedbackComplaint.Status
+                        };
+            var result = query.ToList();
+            return result;
+        }
+
+        //15
+        [HttpPost("showescalatedfeedbacks")]
+        public IEnumerable<FeedbacksToDisplay> ShowEscalatedFeedbacks(int vendorId)
+        {
+            var query = from feedbackComplaint in _context.FeedbackComplaints
+                        join customer in _context.Customers on feedbackComplaint.CustomerId equals customer.CustomerId
+                        join tiffin in _context.Tiffins on feedbackComplaint.TiffinId equals tiffin.TiffinId
+                        join vendor in _context.Vendors on tiffin.VendorId equals vendor.VendorId
+                        where vendor.VendorId == vendorId && feedbackComplaint.Status == "escalated"
+                        select new FeedbacksToDisplay
+                        {
+                            FcId = feedbackComplaint.FcId,
+                            CustomerName = customer.Name,
+                            tiffinName = tiffin.TiffinName,
+                            FeedbackCategory = feedbackComplaint.Category,
+                            FeedbackDescription = feedbackComplaint.Description,
+                            FeedbackStatus = feedbackComplaint.Status
+                        };
+            var result = query.ToList();
+            return result;
+        }
+
+        //16
+        [HttpPost("showeonlyfeedbacks")]
+        public IEnumerable<FeedbacksToDisplay> ShowOnlyFeedbacks(int vendorId)
+        {
+            var query = from feedbackComplaint in _context.FeedbackComplaints
+                        join customer in _context.Customers on feedbackComplaint.CustomerId equals customer.CustomerId
+                        join tiffin in _context.Tiffins on feedbackComplaint.TiffinId equals tiffin.TiffinId
+                        join vendor in _context.Vendors on tiffin.VendorId equals vendor.VendorId
+                        where vendor.VendorId == vendorId && feedbackComplaint.Category == "feedback"
+                        select new FeedbacksToDisplay
+                        {
+                            FcId = feedbackComplaint.FcId,
+                            CustomerName = customer.Name,
+                            tiffinName = tiffin.TiffinName,
+                            FeedbackCategory = feedbackComplaint.Category,
+                            FeedbackDescription = feedbackComplaint.Description,
+                            FeedbackStatus = feedbackComplaint.Status
+                        };
+            var result = query.ToList();
+            return result;
+        }
+
+        //17
+        [HttpPost("showeonlycomplaints")]
+        public IEnumerable<FeedbacksToDisplay> ShowOnlyComplaints(int vendorId)
+        {
+            var query = from feedbackComplaint in _context.FeedbackComplaints
+                        join customer in _context.Customers on feedbackComplaint.CustomerId equals customer.CustomerId
+                        join tiffin in _context.Tiffins on feedbackComplaint.TiffinId equals tiffin.TiffinId
+                        join vendor in _context.Vendors on tiffin.VendorId equals vendor.VendorId
+                        where vendor.VendorId == vendorId && feedbackComplaint.Category == "complaint"
+                        select new FeedbacksToDisplay
+                        {
+                            FcId = feedbackComplaint.FcId,
+                            CustomerName = customer.Name,
+                            tiffinName = tiffin.TiffinName,
+                            FeedbackCategory = feedbackComplaint.Category,
+                            FeedbackDescription = feedbackComplaint.Description,
+                            FeedbackStatus = feedbackComplaint.Status
+                        };
+            var result = query.ToList();
+            return result;
+        }
+
+        //18
+        [HttpPost("sendapprovalrequest")]
+        public ActionResult<ApprovalRequest> SendApprovalRequest([FromBody] ApprovalRequest request)
+        {
+            _context.ApprovalRequests.Add(request);
+            _context.SaveChanges();
+            return new ActionResult<ApprovalRequest>(request);
         }
     }
 }

@@ -9,7 +9,7 @@ public partial class ApprovalRequest
 
     public int VendorId { get; set; }
 
-    public string Status { get; set; } = null!;
+    public string? Status { get; set; }
 
-    public virtual Vendor Vendor { get; set; } = null!;
+    public virtual Vendor? Vendor { get; set; }
 }
