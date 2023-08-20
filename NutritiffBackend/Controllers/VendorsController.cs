@@ -296,8 +296,10 @@ namespace NutritiffBackend.Controllers
                             FcId = feedbackComplaint.FcId,
                             CustomerName = customer.Name,
                             tiffinName = tiffin.TiffinName,
+                            VendorName = vendor.Name,
                             FeedbackCategory = feedbackComplaint.Category,
                             FeedbackDescription = feedbackComplaint.Description,
+                            TimeStamp = feedbackComplaint.Timestamp,
                             FeedbackStatus = feedbackComplaint.Status
                         };
             var result = query.ToList();
