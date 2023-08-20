@@ -314,5 +314,20 @@ namespace NutritiffBackend.Controllers
             _context.SaveChanges();
             return new ActionResult<ApprovalRequest>(request);
         }
+
+        //19
+        [HttpPatch("deliver")]
+        public ActionResult<Order> Deliver(int orderId)
+        {
+            var orderToDeliver = _context.Orders.FirstOrDefault(
+                o => o.OrderId == orderId);
+            if (orderToDeliver != null)
+            {
+                orderToDeliver.Status = "delivered";
+                _context.SaveChanges();
+                return new ActionResult<Order>(orderToDeliver);
+            }
+            else { return NotFound(); }
+        }
     }
 }

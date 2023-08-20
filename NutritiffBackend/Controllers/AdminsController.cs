@@ -280,5 +280,164 @@ namespace NutritiffBackend.Controllers
             }
             else { return NotFound(); }
         }
+
+        //15
+        [HttpGet("subscriptionplans")]
+        public IEnumerable<SubscriptionPlan> GetAllPlans()
+        {
+            return _context.SubscriptionPlans.ToList();
+        }
+
+        //16
+        [HttpPost("addplan")]
+        public ActionResult<SubscriptionPlan> AddPlan([FromBody] SubscriptionPlan plan)
+        {
+            _context.SubscriptionPlans.Add(plan);
+            _context.SaveChanges();
+            return new ActionResult<SubscriptionPlan>(plan);
+        }
+
+        //17
+        [HttpPost("getplanbyid")]
+        public ActionResult<SubscriptionPlan> GetPlanById(int planId)
+        {
+            var plan = _context.SubscriptionPlans.FirstOrDefault(
+                p => p.PlanId == planId);
+            if(plan != null)
+            {
+                return new ActionResult<SubscriptionPlan>(plan);
+            }
+            else { return NotFound(); }
+        }
+
+        //18
+        [HttpPatch("updateplan")]
+        public ActionResult<SubscriptionPlan> UpdatePlan([FromBody] SubscriptionPlan plan)
+        {
+            var planToUpdate = _context.SubscriptionPlans.FirstOrDefault(
+                p => p.PlanId == plan.PlanId);
+            if(planToUpdate != null)
+            {
+                planToUpdate.Name = plan.Name;
+                planToUpdate.Description = plan.Description;
+                planToUpdate.Price = plan.Price;
+                planToUpdate.NoOfMeals = plan.NoOfMeals;
+                _context.SaveChanges();
+                return new ActionResult<SubscriptionPlan>(planToUpdate);
+            }
+            else { return NotFound(); }
+        }
+
+        //19
+        [HttpDelete("deleteplan")]
+        public ActionResult<SubscriptionPlan> DeletePlan(int planId)
+        {
+            var planToDelete = _context.SubscriptionPlans.FirstOrDefault(
+                p => p.PlanId == planId);
+            if(planToDelete != null)
+            {
+                _context.SubscriptionPlans.Remove(planToDelete);
+                _context.SaveChanges();
+                return new ActionResult<SubscriptionPlan>(planToDelete);
+            }
+            else
+            { return NotFound(); }
+        }
+
+        //20
+        [HttpGet("getpurchasehistory")]
+        public IEnumerable<SubscriptionPurchase> GetPurchaseHistory()
+        {
+            return _context.SubscriptionPurchases.ToList();
+        }
+
+        //21
+        [HttpGet("getordershistory")]
+        public IEnumerable<OrdersHistory> GetOrdersHistory()
+        {
+            var query = from order in _context.Orders
+                        join customer in _context.Customers on order.CustomerId equals customer.CustomerId
+                        join tiffin in _context.Tiffins on order.TiffinId equals tiffin.TiffinId
+                        select new OrdersHistory
+                        {
+                            orderId =  order.OrderId,
+                            customerName = customer.Name,
+                            tiffinName = tiffin.TiffinName,
+                            quantity = order.Quantity,
+                            totalPrice = order.TotalPrice,
+                            timestamp = order.Timestamp,
+                            status = order.Status
+                        };
+            var results = query.ToList();
+            return results;
+        }
+
+        //22
+        [HttpGet("getrevenuebymonth")]
+        public double GetRevenueByMonth(int month)
+        {
+
+            var totalSum = _context.Orders
+                .Where(order => order.Timestamp.Month == month)
+                .Sum(order => order.TotalPrice);
+            return totalSum;
+        }
+
+        //23
+        [HttpGet("getrevenuebycurrentmonth")]
+        public double GetRevenueByCurrentMonth()
+        {
+            var currentDate = DateTime.Now;
+
+            var totalSum = _context.Orders
+                .Where(order => order.Timestamp.Month == currentDate.Month)
+                .Sum(order => order.TotalPrice);
+            return totalSum;
+        }
+
+        //24
+        [HttpGet("getrevenuebyyear")]
+        public double GetRevenueByYear(int year)
+        {
+            var totalSum = _context.Orders
+                .Where(order => order.Timestamp.Year == year)
+                .Sum(order => order.TotalPrice);
+            return totalSum;
+        }
+
+        //25
+        [HttpGet("sumofrevenuebymonth")]
+        public double SumOfRevenueByMonth(int month)
+        {
+            var totalSum = (from purchase in _context.SubscriptionPurchases
+                            join plan in _context.SubscriptionPlans on purchase.PlanId equals plan.PlanId
+                            where purchase.Timestamp.Month == month
+                            select plan.Price).Sum();
+            return totalSum;
+        }
+
+        //26
+        [HttpGet("sumofrevenuebycurrentmonth")]
+        public double SumOfRevenueByCurrentMonth()
+        {
+            var currentMonth = DateTime.Now.Month;
+            var totalSum = (from purchase in _context.SubscriptionPurchases
+                            join plan in _context.SubscriptionPlans on purchase.PlanId equals plan.PlanId
+                            where purchase.Timestamp.Month == currentMonth
+                            select plan.Price).Sum();
+            return totalSum;
+        }
+
+        //27
+        [HttpGet("sumofrevenuebyyear")]
+        public double SumOfRevenueByYear(int year)
+        {
+            var totalSum = (from purchase in _context.SubscriptionPurchases
+                            join plan in _context.SubscriptionPlans on purchase.PlanId equals plan.PlanId
+                            where purchase.Timestamp.Year == year
+                            select plan.Price)
+                           .Sum();
+            return totalSum;
+        }
     }
 }
