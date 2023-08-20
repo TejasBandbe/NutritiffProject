@@ -11,8 +11,6 @@ public partial class FeedbackComplaint
 
     public int TiffinId { get; set; }
 
-    public int VendorId { get; set; }
-
     public string Category { get; set; } = null!;
 
     public string Description { get; set; } = null!;
@@ -21,9 +19,7 @@ public partial class FeedbackComplaint
 
     public string? Status { get; set; }
 
-    public virtual Customer? Customer { get; set; }
+    public virtual Customer Customer { get; set; } = null!;
 
-    public virtual Tiffin? Tiffin { get; set; }
-
-    public virtual Vendor? Vendor { get; set; }
+    public virtual Tiffin Tiffin { get; set; } = null!;
 }

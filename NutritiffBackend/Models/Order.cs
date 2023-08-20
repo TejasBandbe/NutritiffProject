@@ -11,6 +11,8 @@ public partial class Order
 
     public int TiffinId { get; set; }
 
+    public int Quantity { get; set; }
+
     public double TotalPrice { get; set; }
 
     public DateTime Timestamp { get; set; }

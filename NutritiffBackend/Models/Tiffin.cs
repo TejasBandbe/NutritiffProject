@@ -19,7 +19,7 @@ public partial class Tiffin
 
     public string ImageLink { get; set; } = null!;
 
-    public string Status { get; set; } = null!;
+    public string? Status { get; set; }
 
     public virtual ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
@@ -29,5 +29,5 @@ public partial class Tiffin
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public virtual Vendor Vendor { get; set; } = null!;
+    public virtual Vendor? Vendor { get; set; }
 }

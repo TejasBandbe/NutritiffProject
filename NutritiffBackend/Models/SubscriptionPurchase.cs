@@ -11,8 +11,6 @@ public partial class SubscriptionPurchase
 
     public int CustomerId { get; set; }
 
-    public DateOnly StartDate { get; set; }
-
     public string? Status { get; set; }
 
     public string? TransactionId { get; set; }

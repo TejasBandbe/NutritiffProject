@@ -212,8 +212,6 @@ public partial class NutritiffContext : DbContext
 
             entity.HasIndex(e => e.TiffinId, "fk_fc_tiffinid_idx");
 
-            entity.HasIndex(e => e.VendorId, "fk_fc_vendor_id_idx");
-
             entity.Property(e => e.FcId).HasColumnName("fc_id");
             entity.Property(e => e.Category)
                 .HasMaxLength(10)
@@ -226,10 +224,12 @@ public partial class NutritiffContext : DbContext
                 .HasColumnName("description");
             entity.Property(e => e.Status)
                 .HasMaxLength(15)
-                .HasDefaultValueSql("'under review'")
                 .HasColumnName("status");
             entity.Property(e => e.TiffinId).HasColumnName("tiffin_id");
-            entity.Property(e => e.VendorId).HasColumnName("vendor_id");
+            entity.Property(e => e.Timestamp)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
+                .HasColumnType("datetime")
+                .HasColumnName("timestamp");
 
             entity.HasOne(d => d.Customer).WithMany(p => p.FeedbackComplaints)
                 .HasForeignKey(d => d.CustomerId)
@@ -238,10 +238,6 @@ public partial class NutritiffContext : DbContext
             entity.HasOne(d => d.Tiffin).WithMany(p => p.FeedbackComplaints)
                 .HasForeignKey(d => d.TiffinId)
                 .HasConstraintName("fk_fc_tiffinid");
-
-            entity.HasOne(d => d.Vendor).WithMany(p => p.FeedbackComplaints)
-                .HasForeignKey(d => d.VendorId)
-                .HasConstraintName("fk_fc_vendorid");
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -324,15 +320,17 @@ public partial class NutritiffContext : DbContext
             entity.Property(e => e.PurchaseId).HasColumnName("purchase_id");
             entity.Property(e => e.CustomerId).HasColumnName("customer_id");
             entity.Property(e => e.PlanId).HasColumnName("plan_id");
-            entity.Property(e => e.StartDate).HasColumnName("start_date");
             entity.Property(e => e.Status)
                 .HasMaxLength(10)
+                .HasDefaultValueSql("'active'")
                 .HasColumnName("status");
             entity.Property(e => e.Timestamp)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("datetime")
                 .HasColumnName("timestamp");
             entity.Property(e => e.TransactionId)
                 .HasMaxLength(50)
+                .HasDefaultValueSql("'tobefilled'")
                 .HasColumnName("transaction_id");
 
             entity.HasOne(d => d.Plan).WithMany(p => p.SubscriptionPurchases)

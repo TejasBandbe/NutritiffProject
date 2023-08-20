@@ -19,13 +19,11 @@ public partial class Vendor
 
     public string MobNo { get; set; } = null!;
 
-    public string Status { get; set; } = null!;
+    public string? Status { get; set; }
 
-    public string ActiveStatus { get; set; } = null!;
+    public string? ActiveStatus { get; set; }
 
     public virtual ICollection<ApprovalRequest> ApprovalRequests { get; set; } = new List<ApprovalRequest>();
-
-    public virtual ICollection<FeedbackComplaint> FeedbackComplaints { get; set; } = new List<FeedbackComplaint>();
 
     public virtual ICollection<Tiffin> Tiffins { get; set; } = new List<Tiffin>();
 }
