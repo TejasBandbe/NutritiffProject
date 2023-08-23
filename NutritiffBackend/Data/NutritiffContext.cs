@@ -7,6 +7,8 @@ namespace Nutritiff.Data;
 
 public partial class NutritiffContext : DbContext
 {
+    internal object OrderItems;
+
     public NutritiffContext(DbContextOptions<NutritiffContext> options)
         : base(options)
     {

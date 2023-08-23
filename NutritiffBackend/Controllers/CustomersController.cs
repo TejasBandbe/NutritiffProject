@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Nutritiff.Data;
 using Nutritiff.Models;
 using NutritiffBackend.Models;
+using System.Security.Cryptography.X509Certificates;
 
 namespace NutritiffBackend.Controllers
 {
@@ -11,6 +13,7 @@ namespace NutritiffBackend.Controllers
     public class CustomersController : ControllerBase
     {
         private readonly NutritiffContext _context;
+        private readonly Random _random = new Random();
 
         public CustomersController(NutritiffContext context)
         {
@@ -23,6 +26,17 @@ namespace NutritiffBackend.Controllers
         {
             return _context.Tiffins.ToList();
         }
+
+        //[HttpGet("tiffins")]
+        //public async IAsyncEnumerable<Tiffin> GetAllTiffins()
+        //{
+        //    await Task.Yield(); // Ensure asynchronous context
+
+        //    foreach (var tiffin in _context.Tiffins)
+        //    {
+        //        yield return tiffin;
+        //    }
+        //}
 
         //2
         [HttpGet("tiffins/veg")]
@@ -96,35 +110,85 @@ namespace NutritiffBackend.Controllers
                 c => c.CartId == cartId);
             if (cartToUpdate != null)
             {
-                cartToUpdate.Quantity -= 1;
-                _context.SaveChanges();
-                return new ActionResult<Cart>(cartToUpdate);
+                if (cartToUpdate.Quantity > 0)
+                {
+                    cartToUpdate.Quantity -= 1;
+                    _context.SaveChanges();
+                    return new ActionResult<Cart>(cartToUpdate);
+                }
+                else
+                {
+                    var cart = DeleteCart(cartToUpdate);
+                    return new ActionResult<Cart>(cart);
+                }
             }
             else
             { return NotFound(); }
         }
 
+        [HttpDelete("/cart/delete")]
+        public Cart DeleteCart(Cart cartToDelete)
+        {
+            _context.Carts.Remove(cartToDelete);
+            _context.SaveChanges();
+            return cartToDelete;
+        }
+
         //9
+        //[HttpPost("placeorder")]
+        //public ActionResult<Order> PlaceOrder([FromBody] Order order)
+        //{
+        //        _context.Orders.Add(order);
+        //        _context.SaveChanges();
+        //        return new ActionResult<Order>(order);
+        //}
+
         [HttpPost("placeorder")]
         public ActionResult<Order> PlaceOrder([FromBody] Order order)
         {
-                _context.Orders.Add(order);
-                _context.SaveChanges();
-                return new ActionResult<Order>(order);
+            string Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            char[] randomChars = new char[8];
+            for (int i = 0; i < 8; i++)
+            {
+                randomChars[i] = Characters[_random.Next(0, Characters.Length)];
+            }
+            string transactionID = new string(randomChars);
+            order.TransactionId = transactionID;
+            _context.Orders.Add(order);
+            _context.SaveChanges();
+            return new ActionResult<Order>(order);
         }
 
         //10
         [HttpPost("myorders")]
         public IEnumerable<Order> GetMyOrders([FromBody] int customerId)
-        { 
-            var myorders =  _context.Orders.Where(
-                o => o.CustomerId == customerId).ToList();
-            if(myorders != null)
-            {
-                return myorders;
-            }
-            else
-            { return Enumerable.Empty<Order>(); }
+        {
+            var query = from tiffin in _context.Tiffins
+                        join orderItem in _context.OrderItems on tiffin.TiffinId equals orderItem.TiffinId
+                        join order in _context.Orders on orderItem.OrderId equals order.OrderId
+                        where order.CustomerId == customerId
+                        select new
+                        {
+                            orderId = order.OrderId,
+                            tiffinId = orderItem.TiffinId,
+                            tiffinName = tiffin.TiffinName,
+                            quantity = orderItem.Quantity,
+                            totalPrice = order.TotalPrice,
+                            transactiond = order.TransactionId,
+                            timestamp = order.Timestamp
+                        };
+
+            var results = query.ToList();
+            return results;
+
+            //var myorders =  _context.Orders.Where(
+            //    o => o.CustomerId == customerId).ToList();
+            //if(myorders != null)
+            //{
+            //    return myorders;
+            //}
+            //else
+            //{ return Enumerable.Empty<Order>(); }
         }
 
         //11
