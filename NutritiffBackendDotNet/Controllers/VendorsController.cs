@@ -44,7 +44,7 @@ namespace NutritiffBackendDotNet.Controllers
 
         //3
         [HttpPost("myorders")]
-        public IEnumerable<OrdersToDisplay> ShowMyOrders([FromBody] int vendorId)
+        public IEnumerable<ShowOrder> ShowMyOrders([FromBody] int vendorId)
         {
             var query = from vendor in _context.Vendors
                         join tiffin in _context.Tiffins on vendor.VendorId equals tiffin.VendorId
@@ -64,7 +64,7 @@ namespace NutritiffBackendDotNet.Controllers
                         };
 
             var results = query.ToList();
-            return (IEnumerable<OrdersToDisplay>)results;
+            return results;
         }
 
         //4
