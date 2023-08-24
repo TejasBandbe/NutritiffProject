@@ -6,36 +6,36 @@ import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import bgimage4 from '../../../src/images/bg4.jpg'
 
-function OrderHistory() {
+function SubPurchaseHistory() {
+
     var admin = sessionStorage.getItem("user");
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
 
-    const [orders, setOrders] = useState([])
-    const [order, setOrder] = useState({orderId:0, customerName:"", tiffinName:"", quantity:0,
-                                              totalPrice:0.0, timestamp:"", status:""})
+    const [purchases, setPurchases] = useState([])
+    const [purchase, setPurchase] = useState({puchaseId:0, planId:0, customerId:0, status:"",
+                                              transactionId:"", timestamp:""})
 
     useEffect(()=>{
     console.log("Inside Component Did Mount")
-    getOrderHistory();
+    getPurchaseHistory();
     }, [])
     
     useEffect(()=>
     {
         console.log("Component Did Update is called..")
-    }, [orders, order]);
+    }, [purchases, purchase]);
 
-    const getOrderHistory = async() =>
+    const getPurchaseHistory = async() =>
   {
     debugger
-    const url = createUrl('api/admins/getordershistory')
+    const url = createUrl('api/admins/getpurchasehistory')
     axios.get(url)
     .then(res =>{
       debugger
       log(res.data)
-      setOrders(res.data)
+      setPurchases(res.data)
     })
   }
-
 
   if(isLoggedIn)
     {
@@ -49,32 +49,30 @@ function OrderHistory() {
       <div className="col-md-2"></div>
       <div className="col-md-8">
         <div style={{backgroundColor:'white'}}>
-        <h2 style={{textAlign:'center', marginTop:'15px', padding:'10px'}}>Order History</h2>
+        <h2 style={{textAlign:'center', marginTop:'15px', padding:'10px'}}>Purchase History</h2>
         </div>
         <div className="table-responsive my-3">
           <table className="table table-bordered">
             <thead>
               <tr>
-                <th>Customer Name</th>
-                <th>Tiffin Name</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th>Time</th>
+                <th>Plan ID</th>
+                <th>Customer ID</th>
                 <th>Status</th>
+                <th>transactionId</th>
+                <th>Timestamp</th>
               </tr>
             </thead>
             <tbody>
               {
-                orders.map((order) =>
+                purchases.map((purchase) =>
                 {
                   return (
                   <tr>
-                    <td>{order.customerName}</td>
-                    <td>{order.tiffinName}</td>
-                    <td>{order.quantity}</td>
-                    <td>{order.totalPrice}</td>
-                    <td>{order.timestamp}</td>
-                    <td>{order.status}</td>
+                    <td>{purchase.planId}</td>
+                    <td>{purchase.customerId}</td>
+                    <td>{purchase.status}</td>
+                    <td>{purchase.transactionId}</td>
+                    <td>{purchase.timestamp}</td>
                   </tr>)
                 })
               }
@@ -101,4 +99,4 @@ function OrderHistory() {
     }
 }
 
-export default OrderHistory
+export default SubPurchaseHistory

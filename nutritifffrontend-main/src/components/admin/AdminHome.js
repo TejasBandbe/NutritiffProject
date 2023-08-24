@@ -4,9 +4,7 @@ import Footer from './Footer';
 import AdminLogin from './AdminLogin'
 import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
-import bgimage from '../../../src/images/a.jpg'
-import bgimage1 from '../../../src/images/bg1.jpg'
-import bgimage6 from '../../../src/images/bg6.jpg'
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 
 function AdminHome() {
@@ -182,8 +180,8 @@ function AdminHome() {
     if(isLoggedIn)
     {
   return (
-    // <div style={{backgroundColor:'#702cf4'}}>
-    <div style={{backgroundImage:`url(${bgimage1})`, backgroundAttachment:'fixed'}}>
+    // <div style={{backgroundColor:'#bbe9ee'}}>
+     <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
       <AdminNavbar/>
 
 <div className='row'>
@@ -196,15 +194,20 @@ function AdminHome() {
     <h5 className="card-title">Monthly Revenue</h5>
     <h6 className="card-title">Current Month</h6>
     <h1 className="card-text">₹ {r1+rev1}</h1>
+    <center>
     <a href="#" className="card-link" style={{color:'white'}}>Refresh</a>
+    </center>
   </div>
 </div>
 
 <div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
     <h5 className="card-title">Monthly Revenue</h5>
-    <h1 className="card-text">₹ {rev1}</h1>
-    <a href="#" className="card-link" style={{color:'white'}}>Refresh</a>
+    <input type="number" id="input" value=""/>
+    <h1 className="card-text">₹ {r2+rev2}</h1>
+    <center>
+    <a href="#" className="card-link" style={{color:'white'}}>Get Revenue</a>
+    </center>
   </div>
 </div>
 
@@ -239,15 +242,20 @@ function AdminHome() {
     <h5 className="card-title">Yearly Revenue</h5>
     <h6 className="card-title">Current year</h6>
     <h1 className="card-text">₹ {r3+rev3}</h1>
+    <center>
     <a href="#" className="card-link" style={{color:'white'}}>Refresh</a>
+    </center>
   </div>
 </div>
 
 <div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
     <h5 className="card-title">Yearly Revenue</h5>
-    <h1 className="card-text">₹ 25000</h1>
-    <a href="#" className="card-link" style={{color:'white'}}>Refresh</a>
+    <input type="number" id="input" value=""/>
+    <h1 className="card-text">₹ {r4+rev4}</h1>
+    <center>
+    <a href="#" className="card-link" style={{color:'white'}}>Get Revenue</a>
+    </center>
   </div>
 </div>
 

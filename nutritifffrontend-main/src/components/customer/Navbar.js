@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
@@ -11,19 +12,19 @@ function Navbar() {
       
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item mx-3">
-          <a className="nav-link active" href="/changeprofile"><b>Change profile</b></a>
+          <Link className="nav-link active" to="/changeprofile"><b>Change profile</b></Link>
         </li>
         <li className="nav-item mx-3">
-          <a className="nav-link active" href="#"><b>Change password</b></a>
+          <Link className="nav-link active" to="/changepassword"><b>Change password</b></Link>
         </li>
         <li className="nav-item mx-3">
-          <a className="nav-link active" href="#"><b>Favourites</b></a>
+          <Link className="nav-link active" to="/favorites"><b>Favourites</b></Link>
         </li>
         <li className="nav-item mx-3">
-          <a className="nav-link active" href="#"><b>My orders</b></a>
+          <Link className="nav-link active" to="#"><b>My orders</b></Link>
         </li>
         <li className="nav-item mx-3">
-          <a className="nav-link active" href="#"><b>My Subsciption</b></a>
+          <Link className="nav-link active" to="#"><b>My Subsciption</b></Link>
         </li>
       </ul>
       

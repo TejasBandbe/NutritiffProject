@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { useHistory, Link } from "react-router-dom";
+import { log, createUrl } from "../../utils/utils";
 import "./styles.css";
 
 function Register() {
 
     const history = useHistory();
-    const [message, setMessage] = useState("");
+
     const customerregister = (event) =>
     {
         event.preventDefault();
@@ -13,17 +14,17 @@ function Register() {
         var { uname, haddress, waddress, pincode, email, mobile, pass, cnfpass } = document.forms[0];
       if(pass.value !== cnfpass.value)
       {
-        setMessage("Password is not matching");
+        log('Passwords are not matching')
       }
       else
       {
         var record = {"name": uname.value,
-                        "home_address": haddress.value,
-                        "work_address": waddress.value,
+                        "homeAddress": haddress.value,
+                        "workAddress": waddress.value,
                         "pincode": pincode.value,
                         "email": email.value,
                         "password": pass.value,
-                        "mob_no": mobile.value,
+                        "mobNo": mobile.value,
                     };
         var helper = new XMLHttpRequest();
         helper.onreadystatechange = ()=>
@@ -33,19 +34,19 @@ function Register() {
               {
                 debugger;
                   var responseReceived = JSON.parse(helper.responseText);
-                  if(responseReceived.affectedRows!== undefined 
-                  && responseReceived.affectedRows>0)
+                  if(responseReceived.email === email.value)
                     {
                       console.log("Registered!!!");
                       history.push('/regpage');
                     }
                     else
                     {
-                      setMessage("Something went wrong!");
+                      log('already registered')
                     }
               }
         };
-        helper.open("POST", "http://localhost:9999/customer/register");
+        const url = createUrl('api/customers/register')
+        helper.open("POST", url);
         helper.setRequestHeader("Content-Type", "application/json");
         helper.send(JSON.stringify(record));
       }
@@ -53,10 +54,9 @@ function Register() {
 
   return (
     <div className="app">
-      <div className="login-form">
+      <div className="login-form"  style={{width:'500px'}}>
         <div className="title"> <center>Register</center></div>
           <div className="form">
-              {/* <form onSubmit={handleSubmit}> */}
               <form onSubmit={customerregister}>
               <div className="input-container">
                   <label>Name</label>
@@ -95,7 +95,7 @@ function Register() {
                 </div>
                 <center>
                 <p className="forgot-password text-right my-3">
-                   Already have account?<a href="/login">Login here</a>
+                   Already have account?<Link to="/login">Login here</Link>
                 </p>
                 </center>
               </form>

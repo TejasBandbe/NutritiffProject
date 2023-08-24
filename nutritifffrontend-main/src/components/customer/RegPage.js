@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import "./styles.css";
 
 function RegPage()
@@ -9,7 +10,7 @@ function RegPage()
             <div className="title"> <center><strong>Registered Successfully!!!</strong></center></div>
             <div className="title"> <center>Your credentials are sent on registered email</center></div>
             <p className="forgot-password text-right my-3">
-                <a href="/login"><center>Back to Login</center></a>
+                <Link to="/login"><center>Back to Login</center></Link>
             </p>
       </div>
     </div>

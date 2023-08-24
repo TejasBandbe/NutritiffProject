@@ -1,11 +1,13 @@
 import './App.css';
-// import Home from './components/customer/Home';
-// import Cart from './components/customer/Cart';
-// import Login from './components/customer/Login';
-// import Register from './components/customer/Register';
-// import RegPage from './components/customer/RegPage';
-// import Profile from './components/customer/Profile';
-// import ChangeProfile from './components/customer/ChangeProfile';
+import Home from './components/customer/Home';
+import Cart from './components/customer/Cart';
+import Login from './components/customer/Login';
+import Register from './components/customer/Register';
+import RegPage from './components/customer/RegPage';
+import Profile from './components/customer/Profile';
+import ChangeProfile from './components/customer/ChangeProfile';
+import ChangePassword from './components/customer/ChangePassword';
+import Favorites from './components/customer/Favorites';
 
 import { BrowserRouter as Router,Route } from "react-router-dom";
 
@@ -30,6 +32,8 @@ import SubscriptionPlans from './components/admin/SubscriptionPlans';
 import AddPlan from './components/admin/AddPlan';
 import UpdatePlan from './components/admin/UpdatePlan';
 import OrderHistory from './components/admin/OrderHistory';
+import SubPurchaseHistory from './components/admin/SubPurchaseHistory';
+
 
 function App() {
   return (
@@ -40,13 +44,15 @@ function App() {
         <Route exact path="/contact" component={ContactUs}/>
       {/* ========================================================================== */}
 
-          {/* <Route exact path="/login" component={Login}/>
+          <Route exact path="/login" component={Login}/>
           <Route exact path="/register" component={Register}/>
           <Route exact path="/regpage" component={RegPage}/>
           <Route exact path="/" component={Home}/>
           <Route exact path="/profile" component={Profile}/>
           <Route exact path="/changeprofile" component={ChangeProfile}/>
-          <Route exact path="/cart" component={Cart}/> */}
+          <Route exact path="/changepassword" component={ChangePassword}/>
+          <Route exact path="/favorites" component={Favorites}/>
+          <Route exact path="/cart" component={Cart}/>
 
   {/* ======================================================================== */}
 
@@ -65,6 +71,7 @@ function App() {
           <Route exact path="/addplan" component={AddPlan}/>
           <Route exact path="/updateplan/:id" component={UpdatePlan}/>
           <Route exact path="/orderhistory" component={OrderHistory}/>
+          <Route exact path="/subpurchasehistory" component={SubPurchaseHistory}/>
         </Router>
         
       </div>

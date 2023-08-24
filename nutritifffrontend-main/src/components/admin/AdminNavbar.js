@@ -49,6 +49,10 @@ const clear = ()=>
 
               <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/orderhistory">
                 <h6> Order History </h6>
+              </Link> 
+
+              <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/subpurchasehistory">
+                <h6> Subscription Purchases </h6>
               </Link>
 
               <Link className={`nav-link ${location.pathname === "/"?"active":""}`} to="#"

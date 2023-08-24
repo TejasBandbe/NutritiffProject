@@ -3,6 +3,10 @@ import Footer from './Footer'
 import CustomerNavbar from './CustomerNavbar';
 import CustomerNavbar2 from './CustomerNavbar2';
 import { useEffect, useState } from 'react';
+import { createUrl, createaUrl, log } from '../../utils/utils';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 
 function Home() {
@@ -36,13 +40,30 @@ function Home() {
               setTiffins(result);
             }
       };
-      helper.open("GET", "http://127.0.0.1:9999/customer/tiffins");
+      const url = createaUrl('customer/tiffins')
+      helper.open("GET", url);
       helper.send();
   }
+
+  const addToCart = async(tiffinId) =>
+  {
+    debugger
+    const url = createUrl('api/customers/cart')
+    axios.post(url,
+      {
+        "customerId": customerId,
+        "tiffinId": tiffinId
+      })
+    .then(res =>{
+      debugger
+      log(res.data)
+    })
+  }
+
 if(!isLoggedIn)
 {
   return (
-    <>
+    <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
       <CustomerNavbar/>
       <>
         <div className="container">
@@ -56,7 +77,7 @@ if(!isLoggedIn)
                       <div className="card-body">
                         <h5 className="card-title">{tiffin.tiffin_name}</h5>
                         <p className="card-text">{tiffin.description}</p>
-                        <a href="#" className="btn btn-primary">Add to cart</a>
+                        <Link to="/login" className="btn btn-primary">Add to cart</Link>
                       </div>
                     </div>
                   </div>
@@ -66,13 +87,13 @@ if(!isLoggedIn)
         </div>
         <Footer/>
     </>
-    </>
+    </div>
   )
 }
 else
 {
   return(
-    <>
+    <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
       <CustomerNavbar2/>
       <>
         <div className="container">
@@ -86,7 +107,11 @@ else
                       <div className="card-body">
                         <h5 className="card-title">{tiffin.tiffin_name}</h5>
                         <p className="card-text">{tiffin.description}</p>
-                        <a href="#" className="btn btn-primary">Go somewhere</a>
+                        <center>
+                        <button type="button" className="btn btn-primary" 
+                        onClick={()=>addToCart(tiffin.tiffin_id)}>
+                          Add to cart</button>
+                        </center>
                       </div>
                     </div>
                   </div>
@@ -98,7 +123,7 @@ else
         </div>
         <Footer/>
     </>
-    </>
+    </div>
   )
 }
 }

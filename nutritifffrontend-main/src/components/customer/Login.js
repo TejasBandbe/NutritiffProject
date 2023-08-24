@@ -1,21 +1,10 @@
-import React, { useState } from "react";  
+import React from "react";  
 import { useHistory, Link } from "react-router-dom";
 import "./styles.css";
+import { createaUrl } from "../../utils/utils";
 
 function Login() {
   const history = useHistory();
-  const [errorMessages, setErrorMessages] = useState({});
-
-  const errors =
-  {
-    uemail: "Invalid EmailId",
-    pass: "Invalid Password"
-  };
-
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
 
   const customerlogin = (event) =>
   {
@@ -48,7 +37,8 @@ function Login() {
                     }
                 }
         };
-        helper.open("POST", "http://localhost:9999/customer/login");
+        const url = createaUrl('customer/login')
+        helper.open("POST", url);
         helper.setRequestHeader("Content-Type", "application/json");
         helper.send(JSON.stringify(creds));
   };
@@ -64,18 +54,13 @@ debugger;
                 <div className="input-container">
                   <label>Email </label>
                   <input type="email" name="uname" required />
-                  {renderErrorMessage("uname")}
                 </div>
                 <div className="input-container">
                   <label>Password </label>
                   <input type="password" name="pass" required />
-                  {renderErrorMessage("pass")}
                 </div>
                 <div className="button-container">
                   <input type="submit" value="Login"/>
-                  {/* <a href="Home_copy.html">
-                  <button type="button" class="btn btn-default">Login</button>
-                  </a> */}
                 </div>
                 <center>
                 <p className="forgot-password text-right my-3">

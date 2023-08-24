@@ -174,8 +174,8 @@ customerRouter.get('/calceledorders', (request, response) => {
 
 //13
 //get profile by id: /customer/{id}
-customerRouter.get('/:id', (request, response) => {
-  const statement = `select * from customers where customer_id = ${request.params.id}`
+customerRouter.post('/getcustomer', (request, response) => {
+  const statement = `select * from customers where customer_id = ${request.body.id}`
   db.query(statement, (error, data) => {
     if (error) {
       response.send('error')
@@ -204,10 +204,24 @@ customerRouter.put('/updateprofile', (request, response) => {
 //12
 //change password: /customer/changepass
 customerRouter.put('/changepass', (request, response) => {
-    const statement = `update customers set password = '${request.body.password} '
+    const statement = `update customers set password = '${request.body.password}'
     where customer_id = ${request.body.customer_id}`
     db.query(statement, (error, data) => {
       if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+  customerRouter.post('/myfavorites', (request, response) => {
+    const statement = `select tiffins.tiffin_id, tiffins.tiffin_name, tiffins.description,
+     tiffins.tiffin_category, tiffins.tiffin_price, tiffins.image_link
+    from favorites, tiffins where tiffins.tiffin_id = favorites.tiffin_id 
+    and favorites.customer_id = ${request.body.customer_id};`;
+    db.query(statement, (error, data) => {
+        if (error) {
         response.send('error')
       } else {
         response.send(data)

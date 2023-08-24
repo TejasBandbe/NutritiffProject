@@ -3,9 +3,12 @@ import { useEffect, useState } from 'react';
 import CustomerNavbar2 from './CustomerNavbar2';
 import Navbar from './Navbar';
 import Footer from './Footer'
+import Login from './Login';
+import { createaUrl } from '../../utils/utils';
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function Profile() {
-    var user = sessionStorage.getItem("user");
+    // var user = sessionStorage.getItem("user");
     var customerId = sessionStorage.getItem("customerId");
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
 
@@ -27,7 +30,9 @@ function Profile() {
   {
     debugger;
     var helper = new XMLHttpRequest();
+    var id = {"id":customerId}
     helper.onreadystatechange = ()=>{
+        debugger
         if (helper.readyState === 4 && helper.status === 200 )
             {
               debugger;
@@ -35,47 +40,59 @@ function Profile() {
               setCustomer(result[0]);
             }
       };
-      helper.open("GET", "http://127.0.0.1:9999/customer/7");
-      helper.send();
+      const url = createaUrl('customer/getcustomer')
+      helper.open("POST", url);
+      helper.setRequestHeader("Content-Type", "application/json");
+      helper.send(JSON.stringify(id));
   }
 
-  return (
-    <>
-    <CustomerNavbar2/>
-    <Navbar/>
-    <h5>
-        <center>
-        <div className="table-responsive col-md-6 my-3">
-            <table className="table table-hover table-bordered">
-                <tbody>
-                    <tr>
-                        <td className='col-md-2'>Name</td>
-                        <td>{customer.name}</td>
-                    </tr>
-                    <tr>
-                        <td>email</td>
-                        <td>{customer.email}</td>
-                    </tr>
-                    <tr>
-                        <td>mobile</td>
-                        <td>{customer.mob_no}</td>
-                    </tr>
-                    <tr>
-                        <td>address</td>
-                        <td>{customer.home_address}</td>
-                    </tr>
-                    <tr>
-                        <td>Pincode</td>
-                        <td>{customer.pincode}</td>
-                    </tr>
-                </tbody>
-            </table>
+  if(isLoggedIn)
+  {
+    return (
+        <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+        <CustomerNavbar2/>
+        <Navbar/>
+        <h5>
+            <center>
+            <div className="table-responsive col-md-6 my-3">
+                <table className="table table-hover table-bordered">
+                    <tbody>
+                        <tr>
+                            <td className='col-md-2'>Name</td>
+                            <td>{customer.name}</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>{customer.email}</td>
+                        </tr>
+                        <tr>
+                            <td>mobile</td>
+                            <td>{customer.mob_no}</td>
+                        </tr>
+                        <tr>
+                            <td>address</td>
+                            <td>{customer.home_address}</td>
+                        </tr>
+                        <tr>
+                            <td>Pincode</td>
+                            <td>{customer.pincode}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            </center>
+            </h5>
+            <Footer/>
         </div>
-        </center>
-        </h5>
-        <Footer/>
-    </>
-  )
+      )
+  }
+  else
+  {
+    return (
+        <Login/>
+    )
+  }
+  
 }
 
 export default Profile
