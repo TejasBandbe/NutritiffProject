@@ -8,6 +8,7 @@
         public string? Pincode { get; set; }
         public string? Email { get; set; }
         public string? MobNo { get; set; }
+        public string? Status { get; set; }
     }
 }
 

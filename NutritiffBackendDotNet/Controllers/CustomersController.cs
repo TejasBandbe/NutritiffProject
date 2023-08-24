@@ -157,8 +157,8 @@ namespace NutritiffBackendDotNet.Controllers
         public ActionResult<Order> PlaceOrder([FromBody] Order order)
         {
             string Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            char[] randomChars = new char[8];
-            for (int i = 0; i < 8; i++)
+            char[] randomChars = new char[15];
+            for (int i = 0; i < 15; i++)
             {
                 randomChars[i] = Characters[_random.Next(0, Characters.Length)];
             }
@@ -424,6 +424,15 @@ namespace NutritiffBackendDotNet.Controllers
         [HttpPost("purchaseplan")]
         public ActionResult<SubscriptionPurchase> PurchasePlan([FromBody] SubscriptionPurchase subscription)
         {
+            string Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            char[] randomChars = new char[15];
+            for (int i = 0; i < 15; i++)
+            {
+                randomChars[i] = Characters[_random.Next(0, Characters.Length)];
+            }
+            string transactionID = new string(randomChars);
+            subscription.TransactionId = transactionID;
+
             _context.SubscriptionPurchases.Add(subscription);
             _context.SaveChanges();
 

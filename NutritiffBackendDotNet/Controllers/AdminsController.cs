@@ -45,7 +45,8 @@ namespace NutritiffBackendDotNet.Controllers
                             Address = vendor.Address,
                             Pincode = vendor.Pincode,
                             Email = vendor.Email,
-                            MobNo = vendor.MobNo
+                            MobNo = vendor.MobNo,
+                            Status = vendor.Status
                         };
             var results = query.ToList();
             return results;
@@ -65,7 +66,8 @@ namespace NutritiffBackendDotNet.Controllers
                             Address = vendor.Address,
                             Pincode = vendor.Pincode,
                             Email = vendor.Email,
-                            MobNo = vendor.MobNo
+                            MobNo = vendor.MobNo,
+                            Status = vendor.Status
                         };
             var results = query.ToList();
             return results;
@@ -73,13 +75,18 @@ namespace NutritiffBackendDotNet.Controllers
 
         //4
         [HttpPatch("approve")]
-        public ActionResult<ApprovalRequest> ApproveTheVendor(int requestId)
+        [Produces("application/json")]
+        public ActionResult<ApprovalRequest> ApproveTheVendor(int vendorId)
         {
             var requestToApprove = _context.ApprovalRequests.FirstOrDefault(
-                r => r.ReqId == requestId);
+                r => r.VendorId == vendorId);
             if (requestToApprove != null)
             {
                 requestToApprove.Status = "approved";
+                _context.SaveChanges();
+                var vendor = _context.Vendors.FirstOrDefault(
+                    v => v.VendorId == vendorId);
+                vendor.Status = "approved";
                 _context.SaveChanges();
                 return new ActionResult<ApprovalRequest>(requestToApprove);
             }
@@ -88,13 +95,17 @@ namespace NutritiffBackendDotNet.Controllers
 
         //5
         [HttpPatch("reject")]
-        public ActionResult<ApprovalRequest> RejectTheVendor(int requestId)
+        public ActionResult<ApprovalRequest> RejectTheVendor(int vendorId)
         {
             var requestToApprove = _context.ApprovalRequests.FirstOrDefault(
-                r => r.ReqId == requestId);
+                r => r.VendorId == vendorId);
             if (requestToApprove != null)
             {
                 requestToApprove.Status = "rejected";
+                _context.SaveChanges();
+                var vendor = _context.Vendors.FirstOrDefault(
+                    v => v.VendorId == vendorId);
+                vendor.Status = "rejected";
                 _context.SaveChanges();
                 return new ActionResult<ApprovalRequest>(requestToApprove);
             }
