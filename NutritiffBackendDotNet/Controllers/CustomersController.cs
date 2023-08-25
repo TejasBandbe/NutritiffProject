@@ -154,7 +154,7 @@ namespace NutritiffBackendDotNet.Controllers
 
         //10
         [HttpPost("placeorder")]
-        public ActionResult<Order> PlaceOrder([FromBody] Order order)
+        public string PlaceOrder([FromBody] Order order)
         {
             string Characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             char[] randomChars = new char[15];
@@ -193,7 +193,7 @@ namespace NutritiffBackendDotNet.Controllers
             _context.SaveChanges();
 
             var carts = DeleteAllFromCart(customerId);
-            return new ActionResult<Order>(order);
+            return "Order placed";
         }
 
         //11

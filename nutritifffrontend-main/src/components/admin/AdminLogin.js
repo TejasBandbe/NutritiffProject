@@ -1,23 +1,12 @@
-import React, { useState } from "react";  
-import { useHistory, Link } from "react-router-dom";
+import React from "react";  
+import { useHistory } from "react-router-dom";
 import "./styles.css";
-import {createUrl} from '../../utils/utils'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { log, createUrl } from "../../utils/utils";
 
 function AdminLogin() {
   const history = useHistory();
-  const [errorMessages, setErrorMessages] = useState({});
-
-  const errors =
-  {
-    pass: "Invalid Password"
-  };
-
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
 
   const adminlogin = (event) =>
   {
@@ -40,13 +29,18 @@ function AdminLogin() {
                     {
                         console.log("Logged in");
                         sessionStorage.setItem("user", admin_id);
-                        sessionStorage.setItem("isLoggedIn",true);
+                        sessionStorage.setItem("adminLoggedIn",true);
                         toast.success("Logged in successfully")
                         history.push('/adminhome');
                     } else
                     {
-                      console.log("Invalid creds...");
+                      log("Invalid creds...");
+                      // toast.error("Invalid password")
                     }
+                }
+                else
+                {
+                  toast.error("Invalid password")
                 }
         };
         const url = createUrl('api/admins/login')
@@ -66,7 +60,6 @@ debugger;
                 <div className="input-container">
                   <label>Password </label>
                   <input type="password" name="pass" required />
-                  {renderErrorMessage("pass")}
                 </div>
                 <div className="button-container">
                   <input type="submit" value="Login"/>

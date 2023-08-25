@@ -9,7 +9,7 @@ import CustomerNavbar2 from './CustomerNavbar2';
 import Navbar from './Navbar';
 
 function MyOrderHistory() {
-    var user = sessionStorage.getItem("user");
+    // var user = sessionStorage.getItem("user");
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
     var customerId = sessionStorage.getItem("customerId");
 

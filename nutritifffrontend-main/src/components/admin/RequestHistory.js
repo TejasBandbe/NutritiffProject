@@ -9,7 +9,7 @@ import bgimage4 from '../../../src/images/bg4.jpg'
 function RequestHistory() {
 
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
     const [vendors, setVendors] = useState([])
     const [vendor, setVendor] = useState({vednorId:0, name:"", address:"", pincode:"",
                                               email:"", mobNo:"", status:""})

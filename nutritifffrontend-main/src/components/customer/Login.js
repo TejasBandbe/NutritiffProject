@@ -2,6 +2,8 @@ import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import "./styles.css";
 import { createaUrl } from "../../utils/utils";
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const history = useHistory();
@@ -20,21 +22,33 @@ function Login() {
                 {
                   debugger;
                     var result = JSON.parse(helper.responseText);
-                    var username = result[0].name;
+                    // var username = result[0].name;
+                    if(result[0].customer_id === 'not found')
+                    {
+                      toast.error("Invalid credentials")
+                    }
+                    else
+                  {
                     var email = result[0].email;
                     var customerId = result[0].customer_id;
 
-                    if (email===uname.value)
-                    {
+                    // if (email===uname.value)
+                    // {
                         console.log("Logged in");
-                        sessionStorage.setItem("user", username);
+                        // sessionStorage.setItem("user", username);
                         sessionStorage.setItem("isLoggedIn",true);
                         sessionStorage.setItem("customerId", customerId);
+                        toast.success("Logged in sucessfully")
                         history.push('/');
-                    } else
-                    {
-                      console.log("Invalid creds...");
+                    // } else
+                    // {
+                    //   console.log("Invalid creds...");
+                    //   toast.error("Invalid credentials")
+                    // }
                     }
+                }
+                else
+                {
                 }
         };
         const url = createaUrl('customer/login')

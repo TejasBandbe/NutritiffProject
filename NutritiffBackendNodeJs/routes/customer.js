@@ -4,9 +4,30 @@ const db = require('../db')
 
 //1
 //Login: /customer/login
+// customerRouter.post('/login', (request, response) => {
+//   const statement = `select * from customers where email = '${request.body.email}' and 
+//   password = '${request.body.password}' and active_status = 'active'`
+  
+//   db.query(statement, (error, data) => {
+//     if (error) {
+//       response.send('error')
+//     } else {
+//       response.send(data)
+//     }
+//   })
+// })
+
 customerRouter.post('/login', (request, response) => {
-  const statement = `select * from customers where email = '${request.body.email}' and 
-  password = '${request.body.password}' and active_status = 'active'`
+  const statement = `SELECT *
+  FROM customers
+  WHERE email = '${request.body.email}' and password = '${request.body.password}'
+  UNION ALL
+  SELECT 'not found', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+  WHERE NOT EXISTS (
+      SELECT 2
+      FROM customers
+      WHERE email = '${request.body.email}' and password = '${request.body.password}'
+  );`
   
   db.query(statement, (error, data) => {
     if (error) {

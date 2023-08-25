@@ -2,13 +2,15 @@ import React, { useState, useEffect } from 'react'
 import AdminNavbar from './AdminNavbar';
 import Footer from './Footer';
 import AdminLogin from './AdminLogin'
-import { createUrl, createaUrl, log } from '../../utils/utils';
+import { createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddPlan() {
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
 
     const [plan, setPlan] = useState('')
     const [description, setDescription] = useState('')
@@ -34,6 +36,7 @@ function AddPlan() {
         .then(res =>{
         debugger
         log(res.data)
+        toast.success("Plan added")
         history.push('/subplans')
     })
     }

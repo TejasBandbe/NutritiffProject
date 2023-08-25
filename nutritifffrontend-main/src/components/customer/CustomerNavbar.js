@@ -3,11 +3,6 @@ import { Link,useLocation } from "react-router-dom";
 
 function CustomerNavbar(props) {
 let location = useLocation();
-const clear = ()=>
-{
-  sessionStorage.clear("isLoggedIn");
-  sessionStorage.clear("user");
-}
 
   return (
     <nav className="navbar navbar-expand-lg-dark navbar-dark bg-light">
@@ -40,7 +35,7 @@ const clear = ()=>
                 <h6> Login </h6>
               </Link>
              
-              <Link onClick={clear} className={`nav-link ${location.pathname === "/login"?"active":""}mx-4`} to="/register"
+              <Link className={`nav-link ${location.pathname === "/login"?"active":""}mx-4`} to="/register"
                 style={{marginLeft: 'auto'}}>
               <h6> Register </h6>
               </Link>

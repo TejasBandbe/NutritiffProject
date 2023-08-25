@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link,useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AdminNavbar(props) {
 let location = useLocation();
 const clear = ()=>
 {
-  sessionStorage.clear("isLoggedIn");
+  toast.success("Logged Out. Visit again!")
+  sessionStorage.clear("adminLoggedIn");
   sessionStorage.clear("user");
 }
 
@@ -23,11 +26,11 @@ const clear = ()=>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <hr></hr>
             <div className="nav-item" style={{marginRight: "20px", color:"white", display:"flex"}}>            
-              <Link className={`nav-link ${location.pathname === "/"?"active":""}`} to="/about">
+              <Link className={`nav-link ${location.pathname === "/"?"active":""}`} to="/adminabout">
                 <h6> About Us </h6>
               </Link>
 
-              <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/contact">
+              <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/admincontact">
                 <h6> Contact Us </h6>
               </Link>
 

@@ -1,12 +1,15 @@
 import React from 'react';
 import { Link,useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CustomerNavbar2(props) {
 let location = useLocation();
 const clear = ()=>
 {
+  toast.success("Logged out. Visit again!")
   sessionStorage.clear("isLoggedIn");
-  sessionStorage.clear("user");
+  sessionStorage.clear("customerId");
 }
 
   return (

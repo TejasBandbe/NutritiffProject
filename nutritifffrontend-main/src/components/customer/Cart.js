@@ -9,7 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router-dom';
 
 function Cart() {
-  var user = sessionStorage.getItem("user");
+  // var user = sessionStorage.getItem("user");
   var isLoggedIn = sessionStorage.getItem("isLoggedIn");
   var customerId = sessionStorage.getItem("customerId");
   const history = useHistory();
@@ -75,10 +75,11 @@ function Cart() {
     var helper = new XMLHttpRequest();
     helper.onreadystatechange = ()=>{
       debugger
-        if (helper.readyState === 4 && helper.status === 500 )
+        if (helper.readyState === 4 && helper.status === 200 )
             {
               debugger;
-              var result = JSON.parse(helper.responseText);
+              var result = helper.responseText;
+              log(result)
               toast.success('Order placed successfully')
               history.push('/')
             }

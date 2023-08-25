@@ -9,7 +9,7 @@ import bgimage4 from '../../../src/images/bg4.jpg'
 function SubPurchaseHistory() {
 
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
 
     const [purchases, setPurchases] = useState([])
     const [purchase, setPurchase] = useState({puchaseId:0, planId:0, customerId:0, status:"",
@@ -49,7 +49,7 @@ function SubPurchaseHistory() {
       <div className="col-md-2"></div>
       <div className="col-md-8">
         <div style={{backgroundColor:'white'}}>
-        <h2 style={{textAlign:'center', marginTop:'15px', padding:'10px'}}>Purchase History</h2>
+        <h2 style={{textAlign:'center', marginTop:'15px', padding:'10px'}}>Subscription Purchase History</h2>
         </div>
         <div className="table-responsive my-3">
           <table className="table table-bordered">

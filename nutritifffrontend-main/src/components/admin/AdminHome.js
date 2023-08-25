@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom';
 import AdminNavbar from './AdminNavbar';
 import Footer from './Footer';
 import AdminLogin from './AdminLogin'
 import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
 function AdminHome() {
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
 
     const [vendors, setVendors] = useState([])
     const [vendor, setVendor] = useState({vednorId:0, name:"", address:"", pincode:"",
@@ -60,7 +62,9 @@ function AdminHome() {
             {
               debugger;
               var result = JSON.parse(helper.responseText);
+              log(result)
               log('Vendor approved sucecssfully');
+              toast.success("Vendor approved")
               approveVendor(id);
             }
       };
@@ -104,6 +108,7 @@ function AdminHome() {
               var result = JSON.parse(helper.responseText);
               log(result)
               log('Vendor rejected sucecssfully');
+              toast.success("Vendor rejected")
               rejectVendor(id);
             }
       };
@@ -196,7 +201,7 @@ function AdminHome() {
     <h6 className="card-title">Current Month</h6>
     <h1 className="card-text">₹ {r1+rev1}</h1>
     <center>
-    <a href="#" className="card-link" style={{color:'white'}}>Refresh</a>
+    <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
   </div>
 </div>
@@ -207,7 +212,7 @@ function AdminHome() {
     <input type="number" id="input" value=""/>
     <h1 className="card-text">₹ {r2+rev2}</h1>
     <center>
-    <a href="#" className="card-link" style={{color:'white'}}>Get Revenue</a>
+    <Link to="#" className="card-link" style={{color:'white'}}>Get Revenue</Link>
     </center>
   </div>
 </div>
@@ -244,7 +249,7 @@ function AdminHome() {
     <h6 className="card-title">Current year</h6>
     <h1 className="card-text">₹ {r3+rev3}</h1>
     <center>
-    <a href="#" className="card-link" style={{color:'white'}}>Refresh</a>
+    <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
   </div>
 </div>
@@ -255,7 +260,7 @@ function AdminHome() {
     <input type="number" id="input" value=""/>
     <h1 className="card-text">₹ {r4+rev4}</h1>
     <center>
-    <a href="#" className="card-link" style={{color:'white'}}>Get Revenue</a>
+    <Link to="#" className="card-link" style={{color:'white'}}>Get Revenue</Link>
     </center>
   </div>
 </div>

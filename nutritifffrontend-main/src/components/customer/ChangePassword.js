@@ -7,10 +7,12 @@ import Login from './Login';
 import { createaUrl, log } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function ChangePassword() {
     const history = useHistory();
-    var user = sessionStorage.getItem("user");
+    // var user = sessionStorage.getItem("user");
     var customerId = sessionStorage.getItem("customerId");
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
 
@@ -39,6 +41,7 @@ function ChangePassword() {
                 var result = JSON.parse(helper.responseText);
                 log(result)
                 history.push('/profile');
+                toast.success("Password changed")
                 }
         };
         const url = createaUrl('customer/changepass')

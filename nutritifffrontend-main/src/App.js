@@ -37,6 +37,8 @@ import AddPlan from './components/admin/AddPlan';
 import UpdatePlan from './components/admin/UpdatePlan';
 import OrderHistory from './components/admin/OrderHistory';
 import SubPurchaseHistory from './components/admin/SubPurchaseHistory';
+import AdminAboutUs from './components/admin/AdminAboutUs';
+import AdminContactUs from './components/admin/AdminContactUs';
 
 function App() {
   return (
@@ -78,6 +80,8 @@ function App() {
           <Route exact path="/updateplan/:id" component={UpdatePlan}/>
           <Route exact path="/orderhistory" component={OrderHistory}/>
           <Route exact path="/subpurchasehistory" component={SubPurchaseHistory}/>
+          <Route exact path="/adminabout" component={AdminAboutUs}/>
+          <Route exact path="/admincontact" component={AdminContactUs}/>
         </Router>
         
       </div>

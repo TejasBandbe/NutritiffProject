@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function Home() {
-  var user = sessionStorage.getItem("user");
+  // var user = sessionStorage.getItem("user");
   var customerId = sessionStorage.getItem("customerId");
   var isLoggedIn = sessionStorage.getItem("isLoggedIn");
 

@@ -8,7 +8,7 @@ import bgimage4 from '../../../src/images/bg4.jpg'
 
 function OrderHistory() {
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
 
     const [orders, setOrders] = useState([])
     const [order, setOrder] = useState({orderId:0, customerName:"", tiffinName:"", quantity:0,

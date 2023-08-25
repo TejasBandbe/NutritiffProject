@@ -4,7 +4,7 @@ import CustomerNavbar from './CustomerNavbar';
 import Footer from './Footer';
 
 function AboutUs() {
-    var user = sessionStorage.getItem("user");
+    // var user = sessionStorage.getItem("user");
     var customerId = sessionStorage.getItem("customerId");
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
 

@@ -2,6 +2,8 @@ import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { log, createUrl } from "../../utils/utils";
 import "./styles.css";
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function Register() {
 
@@ -15,6 +17,7 @@ function Register() {
       if(pass.value !== cnfpass.value)
       {
         log('Passwords are not matching')
+        toast.error("Passwords not matching")
       }
       else
       {
@@ -37,13 +40,19 @@ function Register() {
                   if(responseReceived.email === email.value)
                     {
                       console.log("Registered!!!");
-                      history.push('/regpage');
+                      history.push('/login');
+                      toast.success("Registered successfully")
                     }
                     else
                     {
                       log('already registered')
+                      toast.error("User already registered")
                     }
               }
+              else
+              {
+                toast.error("User already registered")
+            }
         };
         const url = createUrl('api/customers/register')
         helper.open("POST", url);

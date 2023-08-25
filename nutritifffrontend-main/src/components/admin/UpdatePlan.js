@@ -2,15 +2,17 @@ import React, { useState, useEffect } from 'react'
 import AdminNavbar from './AdminNavbar';
 import Footer from './Footer';
 import AdminLogin from './AdminLogin'
-import { createUrl, createaUrl, log } from '../../utils/utils';
+import { createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function UpdatePlan() {
     const {id} = useParams();
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
     const history = useHistory();
 
     const [planId, setPlanId] = useState(0)
@@ -84,6 +86,7 @@ function UpdatePlan() {
         .then(res =>{
             debugger
             log(res.data)
+            toast.success("Plan updated")
             history.push('/subplans')
         })  
     }

@@ -5,10 +5,12 @@ import AdminLogin from './AdminLogin'
 import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Feedbacks() {
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
     const [feedbacks, setFeedbacks] = useState([])
     const [feedback, setFeedback] = useState({fcId:0, customerName:"", tiffinName:"", vendorName:"",
                 feedbackCategory:"", feedbackDescription:"", timestamp:"", feedbackStatus:""})
@@ -49,6 +51,7 @@ function Feedbacks() {
             var result = JSON.parse(helper.responseText);
             log('compaint resolved')
             log(result)
+            toast.success("Complaint resolved")
             window.location.reload();
             }
     };
@@ -72,6 +75,7 @@ function Feedbacks() {
             var result = JSON.parse(helper.responseText);
             log('compaint escalated')
             log(result)
+            toast.success("Complaint escalated")
             window.location.reload();
             }
     };

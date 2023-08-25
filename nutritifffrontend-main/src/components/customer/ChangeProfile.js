@@ -4,13 +4,15 @@ import CustomerNavbar2 from './CustomerNavbar2';
 import Navbar from './Navbar';
 import Footer from './Footer'
 import Login from './Login';
-import { createaUrl,createUrl, log } from '../../utils/utils';
+import { createaUrl, log } from '../../utils/utils';
 import { useHistory } from 'react-router-dom';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function ChangeProfile() {
     const history = useHistory();
-    var user = sessionStorage.getItem("user");
+    // var user = sessionStorage.getItem("user");
     var customerId = sessionStorage.getItem("customerId");
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
 
@@ -55,6 +57,7 @@ function ChangeProfile() {
               setPassword(result[0].password);
               setMobNo(result[0].mob_no);
               setActiveStatus(result[0].active_status);
+              
             }
       };
       const url = createaUrl('customer/getcustomer')
@@ -77,6 +80,7 @@ function ChangeProfile() {
               var result = JSON.parse(helper.responseText);
               log(result)
               history.push('/profile')
+              toast.success("Profile updated");
             }
       };
       const url = createaUrl('customer/updateprofile')

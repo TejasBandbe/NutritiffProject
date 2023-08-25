@@ -6,11 +6,13 @@ import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 function SubscriptionPlans() {
     var admin = sessionStorage.getItem("user");
-    var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+    var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
     const history = useHistory();
 
     const [plans, setPlans] = useState([])
@@ -63,6 +65,7 @@ function SubscriptionPlans() {
                 var result = JSON.parse(helper.responseText);
                 log('plan deleted')
                 log(result)
+                toast.success("Plan removed")
                 window.location.reload();
 
                 }
