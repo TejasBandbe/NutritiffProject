@@ -55,7 +55,7 @@ function Profile() {
         <h5>
             <center>
             <div className="table-responsive col-md-6 my-3">
-                <table className="table table-hover table-bordered">
+                <table className="table table-hover table-bordered" style={{marginTop:'75px', marginBottom:'75px'}}>
                     <tbody>
                         <tr>
                             <td className='col-md-2'>Name</td>

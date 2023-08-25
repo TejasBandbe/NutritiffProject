@@ -3,6 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import "./styles.css";
 import {createUrl} from '../../utils/utils'
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AdminLogin() {
   const history = useHistory();
@@ -40,6 +41,7 @@ function AdminLogin() {
                         console.log("Logged in");
                         sessionStorage.setItem("user", admin_id);
                         sessionStorage.setItem("isLoggedIn",true);
+                        toast.success("Logged in successfully")
                         history.push('/adminhome');
                     } else
                     {

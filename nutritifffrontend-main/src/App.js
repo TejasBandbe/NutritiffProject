@@ -8,6 +8,10 @@ import Profile from './components/customer/Profile';
 import ChangeProfile from './components/customer/ChangeProfile';
 import ChangePassword from './components/customer/ChangePassword';
 import Favorites from './components/customer/Favorites';
+import MyOrders from './components/customer/MyOrders';
+import MyOrderHistory from './components/customer/MyOrderHistory';
+import Subscription from './components/customer/Subscription';
+import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter as Router,Route } from "react-router-dom";
 
@@ -25,7 +29,7 @@ import AdminHome from './components/admin/AdminHome';
 
 import AboutUs from './components/customer/AboutUs';
 import ContactUs from './components/customer/ContactUs';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import RequestHistory from './components/admin/RequestHistory';
 import Feedbacks from './components/admin/Feedbacks';
 import SubscriptionPlans from './components/admin/SubscriptionPlans';
@@ -33,7 +37,6 @@ import AddPlan from './components/admin/AddPlan';
 import UpdatePlan from './components/admin/UpdatePlan';
 import OrderHistory from './components/admin/OrderHistory';
 import SubPurchaseHistory from './components/admin/SubPurchaseHistory';
-
 
 function App() {
   return (
@@ -53,6 +56,9 @@ function App() {
           <Route exact path="/changepassword" component={ChangePassword}/>
           <Route exact path="/favorites" component={Favorites}/>
           <Route exact path="/cart" component={Cart}/>
+          <Route exact path="/myorders" component={MyOrders}/>
+          <Route exact path="/myorderhistory" component={MyOrderHistory}/>
+          <Route exact path="/subscription" component={Subscription}/>
 
   {/* ======================================================================== */}
 

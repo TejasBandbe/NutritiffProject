@@ -4,6 +4,7 @@ import Footer from './Footer';
 import AdminLogin from './AdminLogin'
 import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function Feedbacks() {
     var admin = sessionStorage.getItem("user");
@@ -84,13 +85,13 @@ function Feedbacks() {
   if(isLoggedIn)
   {
 return (
-  <>
+  <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
     <AdminNavbar/>
-    <h2 style={{textAlign:'center', marginTop:'15px'}}>Feedbacks / Complaints</h2>
+    
     <div className="row my-3">
     <div className='col-md-1'></div>
     <div className="col-md-10">
-      
+    <h2 style={{textAlign:'center', marginTop:'15px', backgroundColor:'white', padding:'10px'}}>Feedbacks / Complaints</h2>
       <div className="table-responsive my-3">
         <table className="table table-bordered">
           <thead>
@@ -139,7 +140,7 @@ return (
     </div>
     </div>
     <Footer/>
-    </>
+    </div>
   
 )
   }

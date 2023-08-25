@@ -5,6 +5,8 @@ import AdminLogin from './AdminLogin'
 import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
+import bgimage4 from '../../../src/images/bg4.jpg'
+
 
 function SubscriptionPlans() {
     var admin = sessionStorage.getItem("user");
@@ -74,23 +76,25 @@ function SubscriptionPlans() {
   if(isLoggedIn)
   {
 return (
-  <>
+  <div >
     <AdminNavbar/>
-    <h2 style={{textAlign:'center', marginTop:'15px'}}>Subscription Plans</h2>
-
+    
+<div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed', content:""
+, position:'absolute', top:'0', left:'0', right:'0', width:'100%', height:'100%',
+zIndex:'-1', opacity:'0.6'}}></div>
     <div className='row'>
         <div className='col-md-9'></div>
         <div className='col-md-3'>
-        <button type="button" className="btn btn-primary" onClick={()=>history.push('/addplan')}>Add Plan</button>
+        <button type="button" className="btn btn-primary my-3" onClick={()=>history.push('/addplan')}>Add Plan</button>
         </div>
     </div>
 
     <div className="row my-3">
     <div className="col-md-3"></div>
     <div className="col-md-6">
-      
+    <h2 style={{textAlign:'center', marginTop:'15px', backgroundColor:'white'}}>Subscription Plans</h2>
       <div className="table-responsive my-3">
-        <table className="table table-bordered">
+        <table className="table table-bordered" style={{marginBottom:'75px'}}>
           <thead>
             <tr>
               <th>Plan</th>
@@ -132,7 +136,7 @@ return (
     </div>
     </div>
     <Footer/>
-    </>
+    </div>
   
 )
   }

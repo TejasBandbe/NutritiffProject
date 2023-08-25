@@ -21,10 +21,13 @@ function Navbar() {
           <Link className="nav-link active" to="/favorites"><b>Favourites</b></Link>
         </li>
         <li className="nav-item mx-3">
-          <Link className="nav-link active" to="#"><b>My orders</b></Link>
+          <Link className="nav-link active" to="/myorders"><b>My orders</b></Link>
         </li>
         <li className="nav-item mx-3">
-          <Link className="nav-link active" to="#"><b>My Subsciption</b></Link>
+          <Link className="nav-link active" to="/myorderhistory"><b>Order History</b></Link>
+        </li>
+        <li className="nav-item mx-3">
+          <Link className="nav-link active" to="/subscription"><b>My Subsciption</b></Link>
         </li>
       </ul>
       

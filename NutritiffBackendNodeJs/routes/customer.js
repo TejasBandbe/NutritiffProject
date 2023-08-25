@@ -158,6 +158,34 @@ customerRouter.delete('/myorders', (request, response) => {
     })
   })
 
+  customerRouter.post('/myorders', (request, response) => {
+    const statement = `select orders.order_id, order_items.tiffin_id, tiffins.tiffin_name, order_items.quantity, tiffins.tiffin_price,
+    orders.transaction_id, orders.timestamp, orders.status from order_items, orders, tiffins
+    where order_items.order_id = orders.order_id and order_items.tiffin_id = tiffins.tiffin_id 
+    and orders.customer_id = ${request.body.customer_id} and orders.status='ordered';`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+  customerRouter.post('/orderhistory', (request, response) => {
+    const statement = `select orders.order_id, order_items.tiffin_id, tiffins.tiffin_name, order_items.quantity, tiffins.tiffin_price,
+    orders.transaction_id, orders.timestamp, orders.status from order_items, orders, tiffins
+    where order_items.order_id = orders.order_id and order_items.tiffin_id = tiffins.tiffin_id 
+    and orders.customer_id = ${request.body.customer_id};`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
 //10
 //view canceled orders: /customer/myorders
 customerRouter.get('/calceledorders', (request, response) => {
@@ -171,6 +199,34 @@ customerRouter.get('/calceledorders', (request, response) => {
       }
     })
   })
+
+  customerRouter.post('/cancelorder', (request, response) => {
+    const statement = `update orders set status = 'canceled' where order_id = ${request.body.order_id}`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+
+customerRouter.post('/getsubscription', (request, response) => {
+  const statement = `select subscription_purchases.purchase_id, subscription_purchases.status, subscription_plans.name, 
+  subscription_plans.description, subscription_plans.price, subscription_plans.no_of_meals, subscription_purchases.transaction_id 
+  from subscription_purchases, subscription_plans where subscription_plans.plan_id = subscription_purchases.plan_id and 
+  subscription_purchases.customer_id = ${request.body.customer_id}`
+  db.query(statement, (error, data) => {
+    if (error) {
+      response.send('error')
+    } else {
+      response.send(data)
+    }
+  })
+})
+
+
 
 //13
 //get profile by id: /customer/{id}
@@ -228,6 +284,7 @@ customerRouter.put('/changepass', (request, response) => {
       }
     })
   })
+  
 
   customerRouter.post('/uploadtiffin', (request, response) => {
     const statement = `insert into sample values(default, '${request.body.image}')`;
@@ -239,5 +296,44 @@ customerRouter.put('/changepass', (request, response) => {
       }
     })
 })
+
+customerRouter.post('/getcartitems', (request, response) => {
+  const statement = `select cart.cart_id, tiffins.tiffin_id, tiffins.tiffin_name, tiffins.description, tiffins.tiffin_category, 
+  tiffins.tiffin_price, tiffins.image_link, cart.quantity
+  from cart, tiffins where tiffins.tiffin_id = cart.tiffin_id and cart.customer_id = ${request.body.customer_id};`;
+  db.query(statement, (error, data) => {
+      if (error) {
+      response.send('error')
+    } else {
+      response.send(data)
+    }
+  })
+})
+
+customerRouter.post('/getcarttotal', (request, response) => {
+  const statement = `select sum(tiffins.tiffin_price*cart.quantity) as tot from cart, 
+  tiffins where cart.tiffin_id = tiffins.tiffin_id and cart.customer_id = ${request.body.customer_id};`;
+  db.query(statement, (error, data) => {
+      if (error) {
+      response.send('error')
+    } else {
+      response.send(data)
+    }
+  })
+})
+
+customerRouter.post('/removefromcart', (request, response) => {
+  const statement = `delete from cart where cart_id = ${request.body.cart_id}`;
+  db.query(statement, (error, data) => {
+      if (error) {
+      response.send('error')
+    } else {
+      response.send(data)
+    }
+  })
+})
+
+
+
 
 module.exports = customerRouter

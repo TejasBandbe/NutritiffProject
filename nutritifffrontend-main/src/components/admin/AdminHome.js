@@ -5,6 +5,7 @@ import AdminLogin from './AdminLogin'
 import { createUrl, createaUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import "react-toastify/dist/ReactToastify.css";
 
 
 function AdminHome() {

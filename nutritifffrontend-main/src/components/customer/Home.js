@@ -7,6 +7,8 @@ import { createUrl, createaUrl, log } from '../../utils/utils';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 function Home() {
@@ -57,8 +59,26 @@ function Home() {
     .then(res =>{
       debugger
       log(res.data)
+      toast.success("Added to cart")
     })
   }
+
+  const like = (tiffinId) =>
+  {
+    debugger
+    const url = createUrl('api/customers/addtofavorites')
+    axios.post(url,
+      {
+        "customerId": customerId,
+        "tiffinId": tiffinId,
+      })
+    .then(res =>{
+      debugger
+      log(res.data)
+      toast.success("Added to favorites")
+    })
+  }
+
 
 if(!isLoggedIn)
 {
@@ -77,7 +97,8 @@ if(!isLoggedIn)
                       <div className="card-body">
                         <h5 className="card-title">{tiffin.tiffin_name}</h5>
                         <p className="card-text">{tiffin.description}</p>
-                        <Link to="/login" className="btn btn-primary">Add to cart</Link>
+                        <Link to="/login" className="btn btn-primary mx-3">Add to cart</Link>
+                        <Link to="/login" className="btn btn-primary mx-3">Like</Link>
                       </div>
                     </div>
                   </div>
@@ -108,9 +129,12 @@ else
                         <h5 className="card-title">{tiffin.tiffin_name}</h5>
                         <p className="card-text">{tiffin.description}</p>
                         <center>
-                        <button type="button" className="btn btn-primary" 
+                        <button type="button" className="btn btn-primary mx-3" 
                         onClick={()=>addToCart(tiffin.tiffin_id)}>
                           Add to cart</button>
+                        <button type="button" className="btn btn-danger mx-3" 
+                        onClick={()=>like(tiffin.tiffin_id)}>
+                          Like</button>
                         </center>
                       </div>
                     </div>

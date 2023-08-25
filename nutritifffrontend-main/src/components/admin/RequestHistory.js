@@ -4,6 +4,7 @@ import Footer from './Footer';
 import AdminLogin from './AdminLogin'
 import { createUrl, log } from '../../utils/utils';
 import axios from 'axios';
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function RequestHistory() {
 
@@ -38,9 +39,9 @@ function RequestHistory() {
   if(isLoggedIn)
   {
 return (
-  <>
+  <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
     <AdminNavbar/>
-    <h2 style={{textAlign:'center', marginTop:'15px'}}>Request History</h2>
+    <h2 style={{textAlign:'center', marginTop:'15px', backgroundColor:'white'}}>Request History</h2>
     <div className="row my-3">
     <div className='col-md-1'></div>
     <div className="col-md-10">
@@ -80,7 +81,7 @@ return (
     </div>
     </div>
     <Footer/>
-    </>
+    </div>
   
 )
   }

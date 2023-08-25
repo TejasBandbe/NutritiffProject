@@ -6,6 +6,8 @@ import Footer from './Footer'
 import Login from './Login';
 import { createaUrl, createUrl, log } from '../../utils/utils';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 function Favorites() {
     var user = sessionStorage.getItem("user");
@@ -58,6 +60,7 @@ function Favorites() {
     .then(res =>{
       debugger
       log(res.data)
+      setTiffins(res.data)
     })
   }
 
@@ -68,13 +71,30 @@ function Favorites() {
     axios.post(url,
       {
         "customerId": customerId,
-        "tiffinId": tiffin.tiffin_id
+        "tiffinId": tiffinId
       })
     .then(res =>{
       debugger
       log(res.data)
+      toast.success("Added to cart")
     })
 }
+
+const like = (tiffinId) =>
+  {
+    debugger
+    const url = createUrl('api/customers/addtofavorites')
+    axios.post(url,
+      {
+        "customerId": customerId,
+        "tiffinId": tiffinId
+      })
+    .then(res =>{
+      debugger
+      log(res.data)
+      toast.success("Added to favorites")
+    })
+  }
 
   if(isLoggedIn)
   {
@@ -83,7 +103,7 @@ function Favorites() {
           <CustomerNavbar2/>
           <Navbar/>
           <>
-            <div className="container">
+            <div className="container my-3">
                 <div className="row gy-3">
                   {
                     tiffins.map((tiffin) =>
@@ -98,6 +118,9 @@ function Favorites() {
                             <button type="button" className="btn btn-primary" 
                             onClick={()=>addToCart(tiffin.tiffin_id)}>
                               Add to cart</button>
+                              <button type="button" className="btn btn-danger mx-3" 
+                        onClick={()=>like(tiffin.tiffin_id)}>
+                          Like</button>
                             </center>
                           </div>
                         </div>
