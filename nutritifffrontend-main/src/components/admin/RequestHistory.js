@@ -39,9 +39,11 @@ function RequestHistory() {
   if(isLoggedIn)
   {
 return (
-  <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+  <div>
+    <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
     <AdminNavbar/>
-    <h2 style={{textAlign:'center', marginTop:'15px', backgroundColor:'white'}}>Request History</h2>
+    <h2 style={{textAlign:'center', marginTop:'15px', paddingTop:'180px'}}><h1><b>Request History</b></h1></h2>
     <div className="row my-3">
     <div className='col-md-1'></div>
     <div className="col-md-10">

@@ -80,12 +80,11 @@ function SubscriptionPlans() {
   {
 return (
   <div >
+    <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
     <AdminNavbar/>
-    
-<div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed', content:""
-, position:'absolute', top:'0', left:'0', right:'0', width:'100%', height:'100%',
-zIndex:'-1', opacity:'0.6'}}></div>
-    <div className='row'>
+
+    <div className='row' style={{paddingTop:'180px'}}>
         <div className='col-md-9'></div>
         <div className='col-md-3'>
         <button type="button" className="btn btn-primary my-3" onClick={()=>history.push('/addplan')}>Add Plan</button>

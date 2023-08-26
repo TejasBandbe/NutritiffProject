@@ -89,10 +89,12 @@ function Feedbacks() {
   if(isLoggedIn)
   {
 return (
-  <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+  <div>
+    <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
     <AdminNavbar/>
     
-    <div className="row my-3">
+    <div className="row my-3" style={{paddingTop:"180px"}}>
     <div className='col-md-1'></div>
     <div className="col-md-10">
     <h2 style={{textAlign:'center', marginTop:'15px', backgroundColor:'white', padding:'10px'}}>Feedbacks / Complaints</h2>

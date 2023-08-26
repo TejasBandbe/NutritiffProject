@@ -8,6 +8,9 @@ import axios from 'axios';
 import bgimage4 from '../../../src/images/bg4.jpg'
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import image1 from '../../images/bg8.jpg'
+import image2 from '../../images/bg9.jpg'
+import image3 from '../../images/bg10.jpg'
 
 
 function AdminHome() {
@@ -187,11 +190,14 @@ function AdminHome() {
     {
   return (
     // <div style={{backgroundColor:'#bbe9ee'}}>
-     <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+     <div>
+      <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
+ 
       <AdminNavbar/>
 
-<div className='row'>
-  <div className='col-md-2 my-3'>
+<div className='row' style={{paddingTop:"180px"}}>
+<div className='col-md-2 my-3'>
     {/* <h4>Monthly revenue</h4>
 <div style={{border:'1px solid black', height:'40px'}}></div> */}
 
@@ -222,13 +228,13 @@ function AdminHome() {
       <div id="carouselExample" className="carousel slide">
   <div className="carousel-inner">
     <div className="carousel-item active">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGwoYWCOQfoeTGYWJ-D1BcJOA0qD7Xcrk-Vw&usqp=CAU" style={{height:'400px'}} className="d-block w-100" alt="..."/>
+      <img src={image1} style={{height:'400px'}} className="d-block w-100" alt="..."/>
       </div>
     <div className="carousel-item">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiRlbX47U1YATt1ThqKKE0zaxnmZNy79BmVA&usqp=CAU" style={{height:'400px'}} className="d-block w-100" alt="..."/>
+      <img src={image2} style={{height:'400px'}} className="d-block w-100" alt="..."/>
     </div>
     <div className="carousel-item">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHIVHzser-cPTSPj0Nj8gMBufKf8WvDTL1Ug&usqp=CAU" style={{height:'400px'}} className="d-block w-100" alt="..."/>
+      <img src={image3} style={{height:'400px'}} className="d-block w-100" alt="..."/>
     </div>
   </div>
   <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

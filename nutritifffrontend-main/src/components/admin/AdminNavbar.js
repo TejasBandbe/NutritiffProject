@@ -13,7 +13,7 @@ const clear = ()=>
 }
 
   return (
-    <nav className="navbar navbar-expand-lg-dark navbar-dark bg-light">
+    <nav className="navbar navbar-expand-lg-dark navbar-dark bg-light fixed-top">
         <div className="container-fluid" style={{backgroundColor:'olivedrab'}}>
             <Link className="navbar-brand" to="/adminhome">              
               <img src="/images/logo.png" style={{height:75, width:90}}></img>

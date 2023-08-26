@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function AddPlan() {
     var admin = sessionStorage.getItem("user");
@@ -45,8 +46,10 @@ function AddPlan() {
     {
   return (
     <>
+    <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
       <AdminNavbar/>
-      <div>
+      <div style={{paddingTop:"180px"}}>
       <h1 style={{ textAlign: 'center', margin: 10 }}>Add a new plan</h1>
 
       <div className='row'>

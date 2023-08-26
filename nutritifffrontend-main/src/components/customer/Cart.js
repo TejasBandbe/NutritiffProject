@@ -159,6 +159,14 @@ function Cart() {
             <h1 style={{textAlign:'center'}}>Summary</h1>
             <hr></hr>
 
+            <div clasName="form-check">
+  <input clasName="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"/>
+  <label clasName="form-check-label" for="flexRadioDefault1">
+    <h4 className="mx-3">Make payment by card</h4>
+  </label>
+</div>
+
+
         <div>
           <div className="form-check">
             <div className="container my-3">
@@ -169,7 +177,23 @@ function Cart() {
            <label><h5>Card Expiry</h5></label>
            <input className="form-control my-3" placeholder="mm/yy" type="text" style={{height:'50px'}}></input>
            <label><h5>CVV</h5></label>
-           <input className="form-control my-3" placeholder="" type="password" style={{height:'50px'}}></input>
+           <input className="form-control my-3" placeholder="CVV" type="password" style={{height:'50px'}}></input>
+            </div>
+          </div>
+
+          <hr></hr>
+          <div clasName="form-check">
+  <input clasName="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"/>
+  <label clasName="form-check-label" for="flexRadioDefault2">
+    <h4 className="mx-3">Make payment by UPI</h4>
+  </label>
+  </div>
+
+  <div className="form-check">
+            <div className="container my-3">
+              <label> <h5>Enter UPI ID </h5></label>
+           <input className="form-control my-3" placeholder="someexample@okbank" type="text" style={{height:'50px'}}></input>
+      
             </div>
           </div>
 

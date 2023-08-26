@@ -40,12 +40,13 @@ function SubPurchaseHistory() {
   if(isLoggedIn)
     {
   return (
-    // <div style={{backgroundColor:'#702cf4'}}>
-    <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+    <div>
+      <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
       <AdminNavbar/>
 
       {/* <h2 style={{textAlign:'center', marginTop:'15px'}}>Pending Approval Requests</h2> */}
-      <div className="row my-3">
+      <div className="row my-3" style={{paddingTop:"180px"}}>
       <div className="col-md-2"></div>
       <div className="col-md-8">
         <div style={{backgroundColor:'white'}}>
@@ -86,7 +87,6 @@ function SubPurchaseHistory() {
       </div>
       <Footer/>
       </div>
-    
   )
     }
     else

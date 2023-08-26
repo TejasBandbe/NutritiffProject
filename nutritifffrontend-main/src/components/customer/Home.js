@@ -83,22 +83,34 @@ function Home() {
 if(!isLoggedIn)
 {
   return (
-    <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+      <div>
+   <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
       <CustomerNavbar/>
       <>
         <div className="container">
-            <div className="row gy-3">
+            <div className="row gy-3 my-3">
               {
                 tiffins.map((tiffin) =>
                 {
-                  return <div className="col-md-3">
-                  <div className="card">
-                      <img src={tiffin.image_link} className="card-img-top" alt="..."/>
+                  return <div className="col-md-3 my-3">
+                  <div className="card h-100 bg-dark text-white" style={{borderRadius:'40px'}}>
+                      <img src={tiffin.image_link} className="card-img-top" alt="..."
+                      style={{padding:'10px', borderRadius:'40px'}}/>
                       <div className="card-body">
+                        <div className='row'>
+                          <div className='col-md-8'>
                         <h5 className="card-title">{tiffin.tiffin_name}</h5>
+                        </div>
+                        <div className='col-md-4'>
+                        <h5 className="card-title">₹ {tiffin.tiffin_price}</h5>
+                        </div>
+                        </div>
                         <p className="card-text">{tiffin.description}</p>
-                        <Link to="/login" className="btn btn-primary mx-3">Add to cart</Link>
-                        <Link to="/login" className="btn btn-primary mx-3">Like</Link>
+                        <div className="card-footer mt-auto">
+                        <Link to="/login" className="btn btn-success mx-3">Add to cart</Link>
+                        <Link to="/login" className="btn btn-danger mx-3">Like</Link>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -114,31 +126,72 @@ if(!isLoggedIn)
 else
 {
   return(
-    <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+    <div>
+      <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
       <CustomerNavbar2/>
       <>
+     
         <div className="container">
-            <div className="row gy-3">
+          
+            <div className="row gy-3 my-3">
+              
               {
                 tiffins.map((tiffin) =>
                 {
-                  return <div className="col-md-3">
-                  <div className="card">
-                      <img src={tiffin.image_link} className="card-img-top" alt="..."/>
+                  return <div className="col-md-3 my-3">
+                  <div className="card h-100 bg-dark text-white" style={{borderRadius:'40px'}}>
+                      <img src={tiffin.image_link} className="card-img-top" alt="..."
+                      style={{padding:'10px', borderRadius:'40px'}}/>
                       <div className="card-body">
+                        <div className='row'>
+                          <div className='col-md-8'>
                         <h5 className="card-title">{tiffin.tiffin_name}</h5>
+                        </div>
+                        <div className='col-md-4'>
+                        <h5 className="card-title">₹ {tiffin.tiffin_price}</h5>
+                        </div>
+                        </div>
                         <p className="card-text">{tiffin.description}</p>
+                        <div className="card-footer mt-auto">
                         <center>
-                        <button type="button" className="btn btn-primary mx-3" 
+                        <button type="button" className="btn btn-success mx-3" 
                         onClick={()=>addToCart(tiffin.tiffin_id)}>
                           Add to cart</button>
                         <button type="button" className="btn btn-danger mx-3" 
                         onClick={()=>like(tiffin.tiffin_id)}>
                           Like</button>
                         </center>
+                        </div>
                       </div>
                     </div>
                   </div>
+
+                  // <div className="col-md-3">
+                  // <div className="card" style={{borderRadius:'40px'}}>
+                  //     <img src={tiffin.image_link} className="card-img-top" alt="..."
+                  //     style={{padding:'10px', borderRadius:'40px'}}/>
+                  //     <div className="card-body">
+                  //     <div className='row'>
+                  //         <div className='col-md-8'>
+                  //       <h5 className="card-title">{tiffin.tiffin_name}</h5>
+                  //       </div>
+                  //       <div className='col-md-4'>
+                  //       <h5 className="card-title">₹ {tiffin.tiffin_price}</h5>
+                  //       </div>
+                  //       </div>
+                  //       <p className="card-text">{tiffin.description}</p>
+                  //       <center>
+                  //       <button type="button" className="btn btn-primary mx-3" 
+                  //       onClick={()=>addToCart(tiffin.tiffin_id)}>
+                  //         Add to cart</button>
+                  //       <button type="button" className="btn btn-danger mx-3" 
+                  //       onClick={()=>like(tiffin.tiffin_id)}>
+                  //         Like</button>
+                  //       </center>
+                  //     </div>
+                  //   </div>
+                  // </div>
                 })
               }
               
