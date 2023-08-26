@@ -7,9 +7,29 @@ const upload = multer({dest: 'uploads'})
 
 //1
 //Login: /vendor/login
-vendorRouter.post('/login', (request, response) => {
-    const statement = `select vendor_id, name, email, password from vendors 
-    where email = '${request.body.email}' and password = '${request.body.password}'`
+// vendorRouter.post('/login', (request, response) => {
+//     const statement = `select vendor_id, name, email, password from vendors 
+//     where email = '${request.body.email}' and password = '${request.body.password}'`
+//     db.query(statement, (error, data) => {
+//       if (error) {
+//         response.send('error')
+//       } else {
+//         response.send(data)
+//       }
+//     })
+//   })
+
+  vendorRouter.post('/login', (request, response) => {
+    const statement = `SELECT *
+    FROM vendors
+    WHERE email = '${request.body.email}' and password = '${request.body.password}'
+    UNION ALL
+    SELECT 'not found', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+    WHERE NOT EXISTS (
+        SELECT 2
+        FROM vendors
+        WHERE email = '${request.body.email}' and password = '${request.body.password}'
+    );`
     db.query(statement, (error, data) => {
       if (error) {
         response.send('error')
@@ -18,6 +38,8 @@ vendorRouter.post('/login', (request, response) => {
       }
     })
   })
+
+  
 
 //2
 //Register: /vendor/register
@@ -47,6 +69,23 @@ vendorRouter.get('/home', (request, response) => {
       }
     })
   })
+
+  vendorRouter.post('/getmyorders', (request, response) => {
+    const statement = `select orders.order_id, customers.name, customers.home_address, 
+    customers.work_address, vendors.name as vendor_name, tiffins.tiffin_name,
+    order_items.quantity from order_items, orders, customers, tiffins, vendors where
+    vendors.vendor_id = tiffins.tiffin_id and tiffins. tiffin_id and order_items.tiffin_id and order_items.order_id = orders.order_id
+    and orders.customer_id = customers.customer_id and vendors.vendor_id = ${request.body.vendor_id} and orders.status = 'ordered'`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+  
 
 //4
 vendorRouter.post('/addtiffin', upload.single('image'), (request, response) => {

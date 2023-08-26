@@ -15,10 +15,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter as Router,Route } from "react-router-dom";
 
-// import VendorLogin from './components/vendor/VendorLogin';
-// import VendorRegister from './components/vendor/VendorRegister';
+import VendorLogin from './components/vendor/VendorLogin';
+import VendorRegister from './components/vendor/VendorRegister';
 // import VendorRegPage from './components/vendor/VendorRegPage';
-// import VendorHome from './components/vendor/VendorHome';
 
 // ====================================================================
 
@@ -39,6 +38,7 @@ import OrderHistory from './components/admin/OrderHistory';
 import SubPurchaseHistory from './components/admin/SubPurchaseHistory';
 import AdminAboutUs from './components/admin/AdminAboutUs';
 import AdminContactUs from './components/admin/AdminContactUs';
+import VendorHome from './components/vendor/VedorHome';
 
 function App() {
   return (
@@ -64,10 +64,10 @@ function App() {
 
   {/* ======================================================================== */}
 
-          {/* <Route exact path="/vendorlogin" component={VendorLogin}/>
+          <Route exact path="/vendorlogin" component={VendorLogin}/>
           <Route exact path="/vendorregister" component={VendorRegister}/>
-          <Route exact path="/vendorregpage" component={VendorRegPage}/>
-          <Route exact path="/vendorhome" component={VendorHome}/> */}
+          {/* <Route exact path="/vendorregpage" component={VendorRegPage}/> */}
+          <Route exact path="/vendorhome" component={VendorHome}/>
 
   {/* ======================================================================== */}
 
