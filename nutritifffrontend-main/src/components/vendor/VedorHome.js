@@ -78,7 +78,7 @@ function VendorHome() {
   <div className="card-body">
     <h5 className="card-title">Monthly Revenue</h5>
     <h6 className="card-title">Current Month</h6>
-    <h1 className="card-text">₹</h1>
+    <h1 className="card-text">₹ 14570</h1>
     <center>
     <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
@@ -136,9 +136,9 @@ function VendorHome() {
 <div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
 
   <div className="card-body">
-    <h5 className="card-title">Monthly Revenue</h5>
-    <h6 className="card-title">Current Month</h6>
-    <h1 className="card-text">₹</h1>
+    <h5 className="card-title">Yearly Revenue</h5>
+    <h6 className="card-title">Current Year</h6>
+    <h1 className="card-text">₹ 47560</h1>
     <center>
     <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>

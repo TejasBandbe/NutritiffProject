@@ -18,6 +18,15 @@ import { BrowserRouter as Router,Route } from "react-router-dom";
 import VendorLogin from './components/vendor/VendorLogin';
 import VendorRegister from './components/vendor/VendorRegister';
 // import VendorRegPage from './components/vendor/VendorRegPage';
+import VendorHome from './components/vendor/VedorHome';
+import MyTiffins from './components/vendor/MyTiffins';
+import EditTiffin from './components/vendor/EditTiffin';
+import AddTiffin from './components/vendor/AddTiffin';
+import VendorOrderHistory from './components/vendor/OrderHistory';
+import FeedsComps from './components/vendor/FeedsComps';
+import VendorProfile from './components/vendor/VendorProfile';
+import EditVendorProfile from './components/vendor/EditVendorProfile';
+import VendorChangePassword from './components/vendor/VendorChangePassword';
 
 // ====================================================================
 
@@ -38,7 +47,6 @@ import OrderHistory from './components/admin/OrderHistory';
 import SubPurchaseHistory from './components/admin/SubPurchaseHistory';
 import AdminAboutUs from './components/admin/AdminAboutUs';
 import AdminContactUs from './components/admin/AdminContactUs';
-import VendorHome from './components/vendor/VedorHome';
 
 function App() {
   return (
@@ -68,6 +76,14 @@ function App() {
           <Route exact path="/vendorregister" component={VendorRegister}/>
           {/* <Route exact path="/vendorregpage" component={VendorRegPage}/> */}
           <Route exact path="/vendorhome" component={VendorHome}/>
+          <Route exact path="/mytiffins" component={MyTiffins}/>
+          <Route exact path="/edittiffin" component={EditTiffin}/>
+          <Route exact path="/addtiffin" component={AddTiffin}/>
+          <Route exact path="/vendororderhistory" component={VendorOrderHistory}/>
+          <Route exact path="/feedscomps" component={FeedsComps}/>
+          <Route exact path="/vendorprofile" component={VendorProfile}/>
+          <Route exact path="/editvendorprofile" component={EditVendorProfile}/>
+          <Route exact path="/changevendorpass" component={VendorChangePassword}/>
 
   {/* ======================================================================== */}
 

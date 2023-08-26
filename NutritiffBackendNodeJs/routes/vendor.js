@@ -58,17 +58,28 @@ vendorRouter.post('/register', (request, response) => {
 
 //3
 //Vendor Home: /vendor/home
-vendorRouter.get('/home', (request, response) => {
-    const statement = `select * from tiffins where vendor_id = ${request.body.vendor_id} 
-    and status = 'active'`
-    db.query(statement, (error, data) => {
-      if (error) {
-        response.send('error')
-      } else {
-        response.send(data)
-      }
-    })
+// vendorRouter.get('/mytiffins', (request, response) => {
+//     const statement = `select * from tiffins where vendor_id = ${request.body.vendor_id} 
+//     and status = 'active'`
+//     db.query(statement, (error, data) => {
+//       if (error) {
+//         response.send('error')
+//       } else {
+//         response.send(data)
+//       }
+//     })
+//   })
+
+vendorRouter.post('/getmytiffins', (request, response) => {
+  const statement = `select * from tiffins where vendor_id = ${request.body.vendor_id} and status = 'active'`
+  db.query(statement, (error, data) => {
+    if (error) {
+      response.send('error')
+    } else {
+      response.send(data)
+    }
   })
+})
 
   vendorRouter.post('/getmyorders', (request, response) => {
     const statement = `select orders.order_id, customers.name, customers.home_address, 
@@ -88,40 +99,66 @@ vendorRouter.get('/home', (request, response) => {
   
 
 //4
-vendorRouter.post('/addtiffin', upload.single('image'), (request, response) => {
-  const { tiffin_name, description, tiffin_category, tiffin_price, vendor_id } = request.body
+// vendorRouter.post('/addtiffin', upload.single('image'), (request, response) => {
+//   const { tiffin_name, description, tiffin_category, tiffin_price, vendor_id } = request.body
 
-  // request has a property named file which gives details of uploaded file
-  // console.log(request.file)
-  const filename = request.file.filename
+//   // request has a property named file which gives details of uploaded file
+//   // console.log(request.file)
+//   const filename = request.file.filename
 
-  db.query(
-    `insert into tiffins (tiffin_name, description, tiffin_category, tiffin_price, vendor_id, 
-      image_link) values (?, ?, ?, ?, ?, ?)`,
-    [tiffin_name, description, tiffin_category, tiffin_price,vendor_id, filename],
-    (error, data) => {
-      if (error) {
-        response.send('error')
-      } else {
-        response.send(data)
-      }
-    })
-})
-
-//4
-//Add tiffin: /vendor/addtiffin
-// vendorRouter.post('/addtiffin', (request, response) => {
-//     const statement = `insert into tiffins values(default, '${request.body.tiffin_name}', 
-//     '${request.body.description}', '${request.body.tiffin_category}', 
-//     ${request.body.tiffin_price} , ${request.body.vendor_id}, default)`
-//     db.query(statement, (error, data) => {
+//   db.query(
+//     `insert into tiffins (tiffin_name, description, tiffin_category, tiffin_price, vendor_id, 
+//       image_link) values (?, ?, ?, ?, ?, ?)`,
+//     [tiffin_name, description, tiffin_category, tiffin_price,vendor_id, filename],
+//     (error, data) => {
 //       if (error) {
 //         response.send('error')
 //       } else {
 //         response.send(data)
 //       }
 //     })
-//   })
+// })
+
+//4
+//Add tiffin: /vendor/addtiffin
+vendorRouter.post('/addtiffin', (request, response) => {
+    const statement = `insert into tiffins values(default, '${request.body.tiffin_name}', 
+    '${request.body.description}', '${request.body.tiffin_category}', 
+    ${request.body.tiffin_price} , ${request.body.vendor_id}, '${request.body.image_link}',default)`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+  vendorRouter.post('/orderhistory', (request, response) => {
+    const statement = `select customers.name, tiffins.tiffin_name, order_items.quantity, orders.total_price, orders.timestamp from order_items,
+    orders, customers, tiffins where customers.customer_id = orders.customer_id and orders.order_id = order_items.order_id
+    and order_items.tiffin_id = tiffins.tiffin_id and tiffins.vendor_id = ${request.body.vendor_id}
+     and orders.status = 'delivered'`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+
+vendorRouter.post('/getmytiffin', (request, response) => {
+  const statement = `select * from tiffins where tiffin_id = ${request.body.tiffin_id}`
+  db.query(statement, (error, data) => {
+    if (error) {
+      response.send('error')
+    } else {
+      response.send(data)
+    }
+  })
+})
 
 //5
 //Update tiffin: /vendor/updatetiffin
@@ -143,6 +180,17 @@ vendorRouter.put('/updatetiffin', (request, response) => {
 vendorRouter.delete('/deletetiffin', (request, response) => {
     const statement = `update tiffins set status = 'inactive' 
     where tiffin_id = ${request.body.tiffin_id} and vendor_id = ${request.body.vendor_id}`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+  vendorRouter.post('/getvendorbyid', (request, response) => {
+    const statement = `select * from vendors where vendor_id = ${request.body.vendor_id}`
     db.query(statement, (error, data) => {
       if (error) {
         response.send('error')
@@ -184,12 +232,12 @@ vendorRouter.put('/changepass', (request, response) => {
 
 //9
 //View feedback/complaints: /vendor/feedbackcomplaints
-vendorRouter.get('/feedbackcomplaints', (request, response) => {
+vendorRouter.post('/feedbackcomplaints', (request, response) => {
     const statement = `select customers.name, tiffins.tiffin_name, feedback_complaints.category,
     feedback_complaints.description, feedback_complaints.status from feedback_complaints, 
     tiffins, vendors, customers where customers.customer_id=feedback_complaints.customer_id and
-    vendors.vendor_id = feedback_complaints.vendor_id and tiffins.tiffin_id = 
-    feedback_complaints.tiffin_id and feedback_complaints.vendor_id = ${request.body.vendor_id}`
+    tiffins.vendor_id = vendors.vendor_id and tiffins.tiffin_id = 
+    feedback_complaints.tiffin_id and vendors.vendor_id = ${request.body.vendor_id}`
     db.query(statement, (error, data) => {
       if (error) {
         response.send('error')
