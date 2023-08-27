@@ -18,7 +18,7 @@ let location = useLocation();
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <hr></hr>
             <div className="nav-item" style={{marginRight: "20px", color:"white", display:"flex"}}>            
-              <Link className={`nav-link ${location.pathname === "/"?"active":""}`} to="/about">
+              <Link className={`nav-link ${location.pathname === "/"?"active":""}`} to="/customerabout">
                 <h6> About Us </h6>
               </Link>
 

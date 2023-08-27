@@ -11,6 +11,8 @@ import Favorites from './components/customer/Favorites';
 import MyOrders from './components/customer/MyOrders';
 import MyOrderHistory from './components/customer/MyOrderHistory';
 import Subscription from './components/customer/Subscription';
+import CustomerAboutUs from './components/customer/AboutUs';
+import ContactUs from './components/customer/ContactUs';
 import "react-toastify/dist/ReactToastify.css";
 
 import { BrowserRouter as Router,Route } from "react-router-dom";
@@ -27,6 +29,7 @@ import FeedsComps from './components/vendor/FeedsComps';
 import VendorProfile from './components/vendor/VendorProfile';
 import EditVendorProfile from './components/vendor/EditVendorProfile';
 import VendorChangePassword from './components/vendor/VendorChangePassword';
+import VendorAboutUs from './components/vendor/VendorAboutUs';
 
 // ====================================================================
 
@@ -35,8 +38,8 @@ import AdminHome from './components/admin/AdminHome';
 
 // ====================================================================
 
-import AboutUs from './components/customer/AboutUs';
-import ContactUs from './components/customer/ContactUs';
+// import AboutUs from './components/customer/AboutUs';
+// import ContactUs from './components/customer/ContactUs';
 import { ToastContainer, toast } from 'react-toastify';
 import RequestHistory from './components/admin/RequestHistory';
 import Feedbacks from './components/admin/Feedbacks';
@@ -45,16 +48,18 @@ import AddPlan from './components/admin/AddPlan';
 import UpdatePlan from './components/admin/UpdatePlan';
 import OrderHistory from './components/admin/OrderHistory';
 import SubPurchaseHistory from './components/admin/SubPurchaseHistory';
-import AdminAboutUs from './components/admin/AdminAboutUs';
+// import AdminAboutUs from './components/admin/AdminAboutUs';
+import AboutUs from './components/admin/AboutUs';
 import AdminContactUs from './components/admin/AdminContactUs';
+import VendorContactUs from './components/vendor/VendorContactUs';
 
 function App() {
   return (
     <div className='page-container'>
       <div className='content-wrap'>
         <Router>
-        <Route exact path="/about" component={AboutUs}/>
-        <Route exact path="/contact" component={ContactUs}/>
+        {/* <Route exact path="/about" component={AboutUs}/>
+        <Route exact path="/contact" component={ContactUs}/> */}
       {/* ========================================================================== */}
 
           <Route exact path="/login" component={Login}/>
@@ -69,6 +74,8 @@ function App() {
           <Route exact path="/myorders" component={MyOrders}/>
           <Route exact path="/myorderhistory" component={MyOrderHistory}/>
           <Route exact path="/subscription" component={Subscription}/>
+          <Route exact path="/customerabout" component={CustomerAboutUs}/>
+          <Route exact path="/contact" component={ContactUs}/>
 
   {/* ======================================================================== */}
 
@@ -84,6 +91,8 @@ function App() {
           <Route exact path="/vendorprofile" component={VendorProfile}/>
           <Route exact path="/editvendorprofile" component={EditVendorProfile}/>
           <Route exact path="/changevendorpass" component={VendorChangePassword}/>
+          <Route exact path="/vendorabout" component={VendorAboutUs}/>
+          <Route exact path="/vendorcontact" component={VendorContactUs}/>
 
   {/* ======================================================================== */}
 
@@ -96,7 +105,8 @@ function App() {
           <Route exact path="/updateplan/:id" component={UpdatePlan}/>
           <Route exact path="/orderhistory" component={OrderHistory}/>
           <Route exact path="/subpurchasehistory" component={SubPurchaseHistory}/>
-          <Route exact path="/adminabout" component={AdminAboutUs}/>
+          {/* <Route exact path="/adminabout" component={AdminAboutUs}/> */}
+          <Route exact path="/aboutus" component={AboutUs}/>
           <Route exact path="/admincontact" component={AdminContactUs}/>
         </Router>
         

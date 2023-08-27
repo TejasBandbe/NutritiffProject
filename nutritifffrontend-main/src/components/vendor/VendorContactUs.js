@@ -7,11 +7,11 @@ import tejas from '../../images/tejas.jpg'
 import rashmi from '../../images/rashmi.jpeg'
 import mrunal from '../../images/mrunal.jpeg'
 import swaroop from '../../images/swaroop.png'
-import CustomerNavbar2 from "./CustomerNavbar2";
-import CustomerNavbar from "./CustomerNavbar";
+import VendorNavbar from "./VendorNavbar";
+import VendorLogin from "./VendorLogin";
 
-function ContactUs() {
-  var isLoggedIn = sessionStorage.getItem("isLoggedIn");
+function VendorContactUs() {
+  var isLoggedIn = sessionStorage.getItem("vendorLoggedIn");
   const containerStyle = {
     width: "100%",
     height: "100vh",
@@ -69,7 +69,7 @@ function ContactUs() {
       <div>
         <div style={{backgroundImage:`url(${bgimage4})`, 
     backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
-        <CustomerNavbar2/>
+        <VendorNavbar/>
         <div className="row" style={{paddingTop:"180px"}}>
 <div className="col-md-3"></div>
 <div className="col-md-6">
@@ -159,98 +159,10 @@ function ContactUs() {
   }
   else
   {
-    return (
-      <div>
-        <div style={{backgroundImage:`url(${bgimage4})`, 
-    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
-        <CustomerNavbar/>
-        <div className="row" style={{paddingTop:"180px"}}>
-<div className="col-md-3"></div>
-<div className="col-md-6">
-  <div style={{backgroundColor:'black', padding:"20px", borderRadius:"20px"}}>
-  
-<h2 style={{ color: "gold" }}>
-                <br />
-                <center>Get in Touch</center>
-</h2>
-<Form>
-                <Form.Group controlId="name">
-                  <Form.Control
-                    type="text"
-                    placeholder="Your Name"
-                    style={formControlStyle}
-                  />
-                </Form.Group>
-                <Form.Group controlId="email">
-                  <Form.Control
-                    type="email"
-                    placeholder="Your Email"
-                    style={formControlStyle}
-                  />
-                </Form.Group>
-                <Form.Group controlId="message">
-                  <Form.Control
-                    as="textarea"
-                    placeholder="Your Message"
-                    rows={4}
-                    style={formControlStyle}
-                  />
-                </Form.Group>
-                <center>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    style={btnPrimaryStyle}
-                  >
-                    Send Message
-                  </Button>
-                </center>
-              </Form>
-              <hr/>
-              <div style={{color:"white"}}>
-              <Row> 
-            <center>
-              <Telephone size={30}></Telephone>
-              <span style={{ marginRight: "20px" }}></span>
-              <Envelope size={30}></Envelope>
-              <span style={{ marginRight: "20px" }}></span>
-              <GeoAlt size={30}></GeoAlt>
-              <br />
-              <br />
-              <Col><b>Contact: +91- 999-999-9999</b></Col>
-              <br />
-              <Col><b>Email: nutritiffdelivery@gmail.com</b></Col>
-              <br />
-              <Col><b>Address: Hinjewadi Phase I, Pune, 411057</b></Col>
-            </center>
-            
-          </Row>
-
-          <br />
-          <hr />
-          <br />
-          <center>
-            <h2>Our Team</h2>
-            <br/>
-            <img src={mrunal}alt="mrunal" style={picStyle} />
-            <span style={{ marginRight: "20px" }}></span>
-            <img src={rashmi} alt="rashmi" style={picStyle} />
-            <span style={{ marginRight: "20px" }}></span>
-            <img src={swaroop} alt="swaroop" style={picStyle} />
-            <span style={{ marginRight: "20px" }}></span>
-            <img src={tejas} alt="tejas" style={picStyle} />
-            <br />
-          </center>
-          </div>
-
-</div>
-</div>
-<div className="col-md-3"></div>
-        </div>
-      <Footer/>
-      </div>
-    );
+    return(
+      <VendorLogin/>
+    )
   }
 }
 
-export default ContactUs;
+export default VendorContactUs;
