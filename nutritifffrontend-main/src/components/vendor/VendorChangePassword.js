@@ -26,7 +26,7 @@ function VendorChangePassword() {
     useEffect(()=>
     {
         console.log("Component Did Update is called..")
-    }, [password, curpassword]);
+    }, [password, curpassword, newpassword]);
 
     const getMyProfile = ()=>
     {

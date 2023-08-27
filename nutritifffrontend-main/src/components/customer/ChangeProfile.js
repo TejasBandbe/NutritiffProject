@@ -24,7 +24,7 @@ function ChangeProfile() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [mobNo, setMobNo] = useState('')
-    const [activeStatus, setActiveStatus] = useState('')
+    const [status, setStatus] = useState('')
 
 
   useEffect(()=>{
@@ -35,7 +35,7 @@ function ChangeProfile() {
   useEffect(()=>
   {
       log("Component Did Update is called..")
-  }, [cId, name, homeAddress, workAddress, pincode, email, password, mobNo, activeStatus]);
+  }, [cId, name, homeAddress, workAddress, pincode, email, password, mobNo, status]);
 
   const select=()=>
   {
@@ -56,7 +56,7 @@ function ChangeProfile() {
               setEmail(result[0].email);
               setPassword(result[0].password);
               setMobNo(result[0].mob_no);
-              setActiveStatus(result[0].active_status);
+              setStatus(result[0].status);
               
             }
       };
@@ -71,7 +71,8 @@ function ChangeProfile() {
     debugger;
     var helper = new XMLHttpRequest();
     var customer = {"customer_id":cId, "name":name, "home_address":homeAddress, "work_address": workAddress,
-"pincode": pincode, "email": email, "mob_no": mobNo, "password": password, "active_status": activeStatus}
+"pincode": pincode, "email": email, "mob_no": mobNo, "password": password, "status": status}
+
     helper.onreadystatechange = ()=>{
         debugger
         if (helper.readyState === 4 && helper.status === 200 )
@@ -92,10 +93,57 @@ function ChangeProfile() {
   if(isLoggedIn)
   {
     return (
-        <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+        <div>
+           <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
         <CustomerNavbar2/>
-        <Navbar/>
-        <h5>
+        <div className="row" style={{paddingTop:"180px"}}>
+                <div className="col-md-3"></div>
+                <div className="col-md-6">
+            <div className="form-check">
+            <div className="container my-3">
+                <label> <h4>Name </h4></label>
+           <input className="form-control my-3" type="text" style={{height:'50px', fontSize:'20px'}}
+           value={name} onChange={(e) => {
+            setName(e.target.value)
+          }}></input>
+                <label><h4>Home Address</h4></label>
+           <textarea className="form-control my-3" rows="4" style={{fontSize:'20px'}}
+           value={homeAddress} onChange={(e) => {
+            setHomeAddress(e.target.value)
+          }}></textarea>
+          <label><h4>Work Address</h4></label>
+           <textarea className="form-control my-3" rows="4" style={{fontSize:'20px'}}
+           value={workAddress} onChange={(e) => {
+            setWorkAddress(e.target.value)
+          }}></textarea>
+                <label><h4>Pincode</h4></label>
+            <input className="form-control my-3" type="text" style={{height:'50px', fontSize:'20px'}}
+            value={pincode} onChange={(e) => {
+                setPincode(e.target.value)
+              }}></input>
+
+                <label><h4>Email</h4></label>
+           <input className="form-control my-3" type="email" style={{height:'50px', fontSize:'20px'}}
+           value={email} onChange={(e) => {
+            setEmail(e.target.value)
+          }}></input>
+
+<label><h4>Mobile Number</h4></label>
+           <input className="form-control my-3" type="tel" style={{height:'50px', fontSize:'20px'}}
+           value={mobNo} onChange={(e) => {
+            setMobNo(e.target.value)
+          }}></input>
+            </div>
+          </div>
+          <center>
+            <button className="btn btn-success btn-lg my-3" onClick={updateProfile}>Update</button>
+            </center>
+                </div>
+                <div className="col-md-3"></div>
+            </div>
+
+        {/* <h5>
             <center>
             <form role="form">
                 <div className="form-group" style={{marginTop:'100px'}}>
@@ -153,7 +201,7 @@ function ChangeProfile() {
                     <button type="submit" onClick={updateProfile} className="btn btn-success">Save Profile</button>
         </form>
             </center>
-            </h5>
+            </h5> */}
             <Footer/>
         </div>
       )

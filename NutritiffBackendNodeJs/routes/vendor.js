@@ -85,7 +85,7 @@ vendorRouter.post('/getmytiffins', (request, response) => {
     const statement = `select orders.order_id, customers.name, customers.home_address, 
     customers.work_address, vendors.name as vendor_name, tiffins.tiffin_name,
     order_items.quantity from order_items, orders, customers, tiffins, vendors where
-    vendors.vendor_id = tiffins.tiffin_id and tiffins. tiffin_id and order_items.tiffin_id and order_items.order_id = orders.order_id
+    vendors.vendor_id = tiffins.vendor_id and tiffins.tiffin_id = order_items.tiffin_id and order_items.order_id = orders.order_id
     and orders.customer_id = customers.customer_id and vendors.vendor_id = ${request.body.vendor_id} and orders.status = 'ordered'`
     db.query(statement, (error, data) => {
       if (error) {
@@ -270,6 +270,17 @@ vendorRouter.get('/underreview', (request, response) => {
 vendorRouter.post('/approvalrequest', (request, response) => {
     const statement = `insert into approval_requests values(default, 
         ${request.body.vendor_id}, default)`
+    db.query(statement, (error, data) => {
+      if (error) {
+        response.send('error')
+      } else {
+        response.send(data)
+      }
+    })
+  })
+
+  vendorRouter.put('/deliver', (request, response) => {
+    const statement = `update orders set status = 'delivered' where order_id = ${request.body.order_id}`
     db.query(statement, (error, data) => {
       if (error) {
         response.send('error')

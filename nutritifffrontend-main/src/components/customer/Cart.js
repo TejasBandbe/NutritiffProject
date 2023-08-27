@@ -7,6 +7,7 @@ import Footer from './Footer';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router-dom';
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function Cart() {
   // var user = sessionStorage.getItem("user");
@@ -18,6 +19,7 @@ function Cart() {
   const [tiffin, setTiffin] = useState({cart_id:0, tiffin_id: 0, tiffin_name: "", description: "",
                                       tiffin_category: "", tiffin_price: 0.0, image_link: "",
                                     quantity:0});
+  const [quantity, setQuantity] = useState(0);
   const [total, setTotal] = useState(0.0);
 
     useEffect(()=>{
@@ -41,6 +43,10 @@ function Cart() {
               debugger;
               var result = JSON.parse(helper.responseText);
               setTiffins(result);
+              if(result[0] !== undefined)
+              {
+                setQuantity(result[0].quantity)
+              }
             }
       };
       const url = createaUrl('customer/getcartitems')
@@ -112,19 +118,39 @@ function Cart() {
       helper.send(JSON.stringify(obj));
   }
 
+  const increase = ()=>
+  {
+      setQuantity(quantity+1)
+      toast.success('Quantity increased by 1')
+  }
+  const decrease = ()=>
+  {
+    if(quantity === 1)
+    {
+      toast.error('Quantity cannot be reduced further. Remove item from cart instead.')
+    }
+    else
+    {
+      setQuantity(quantity-1)
+      toast.success('Quantity reduced by 1')
+    }
+  }
+
   if(isLoggedIn)
   {
     return(
       <>
+       <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
       <CustomerNavbar2/>
-      <div className='row'>
+      <div className='row' style={{paddingTop:"180px"}}>
         <div className='col-md-8'>
 {
   tiffins.map((tiffin) =>
   {
     return  <>
     <div className='container mt-3'>
-      <div className="border border-4 p-3">
+      <div className="border border-4 p-3 bg-dark text-light">
         <div className='row' style={{height:'200px'}}>
           <div className='col-md-4'>
             <img src={tiffin.image_link} alt='...'/>
@@ -136,9 +162,9 @@ function Cart() {
           </div>
           <div className='col-md-2' style={{marginTop:'80px'}}>
             <div className="quantity-control" style={{display:'flex', textAlign:'center'}}>
-              <button className='btn btn-danger mx-3'>-</button>
-              <input type="number" value={tiffin.quantity} style={{width:"40px"}}/>
-              <button className='btn btn-success mx-3'>+</button>
+              <button className='btn btn-danger mx-3' onClick={decrease}>-</button>
+              <input type="number" value={quantity} style={{width:"40px"}}/>
+              <button className='btn btn-success mx-3' onClick={increase}>+</button>
             </div>
           </div>
           <div className='col-md-2' style={{marginTop:'70px'}}>

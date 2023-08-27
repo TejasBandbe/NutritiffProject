@@ -6,7 +6,7 @@ import Footer from './Footer';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomerNavbar2 from './CustomerNavbar2';
-import Navbar from './Navbar';
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function MyOrders() {
     // var user = sessionStorage.getItem("user");
@@ -75,10 +75,11 @@ function MyOrders() {
   {
     return(
         <div>
+           <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
             <CustomerNavbar2/>
-            <Navbar/>
 
-            <div className="row my-3">
+            <div className="row my-3" style={{paddingTop:"180px"}}>
       <div className="col-md-3"></div>
       <div className="col-md-6">
         <div style={{backgroundColor:'white'}}>

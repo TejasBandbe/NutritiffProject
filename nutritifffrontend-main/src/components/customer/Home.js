@@ -87,7 +87,7 @@ if(!isLoggedIn)
    <div style={{backgroundImage:`url(${bgimage4})`, 
     backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
       <CustomerNavbar/>
-      <>
+      <div style={{paddingTop:"180px"}}>
         <div className="container">
             <div className="row gy-3 my-3">
               {
@@ -119,7 +119,7 @@ if(!isLoggedIn)
             </div>
         </div>
         <Footer/>
-    </>
+    </div>
     </div>
   )
 }
@@ -130,7 +130,7 @@ else
       <div style={{backgroundImage:`url(${bgimage4})`, 
     backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
       <CustomerNavbar2/>
-      <>
+      <div style={{paddingTop:"180px"}}>
      
         <div className="container">
           
@@ -199,7 +199,7 @@ else
             
         </div>
         <Footer/>
-    </>
+    </div>
     </div>
   )
 }

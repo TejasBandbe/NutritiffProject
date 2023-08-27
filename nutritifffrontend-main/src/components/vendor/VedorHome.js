@@ -64,6 +64,33 @@ function VendorHome() {
       helper.send(JSON.stringify(obj));
   }
 
+  const dispatch = ()=>
+  {
+    toast.success("Order dispatched");
+  }
+
+  const deliver = (orderId)=>
+  {
+    debugger
+      var obj = {"order_id": orderId};
+      var helper = new XMLHttpRequest();
+      helper.onreadystatechange = ()=>{
+        debugger
+        if (helper.readyState === 4 && helper.status === 200 )
+            {
+              debugger;
+              var result = JSON.parse(helper.responseText);
+              log(result)
+              toast.success("Order delivered")
+              getMyOrders();
+            }
+      };
+      const url = createaUrl('vendor/deliver')
+      helper.open("PUT", url);
+      helper.setRequestHeader("Content-Type", "application/json");
+      helper.send(JSON.stringify(obj));
+  }
+
   if(isLoggedIn)
   {
     return (
@@ -73,7 +100,7 @@ function VendorHome() {
         <VendorNavbar/>
 <div className='row' style={{paddingTop:"180px"}}>
 <div className='col-md-2 my-3'>
-<div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
+<div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
 
   <div className="card-body">
     <h5 className="card-title">Monthly Revenue</h5>
@@ -118,10 +145,12 @@ function VendorHome() {
                     <td>{order.tiffin_name}</td>
                     <td>{order.quantity}</td>
                     <td>
-                      <button type="button" className="btn btn-outline-primary">Dispatched</button>
+                      <button type="button" className="btn btn-outline-primary"
+                      onClick={dispatch}>Dispatched</button>
                     </td>
                     <td>
-                      <button type="button" className="btn btn-outline-success">Delivered</button>
+                      <button type="button" className="btn btn-outline-success"
+                      onClick={()=>deliver(order.order_id)}>Delivered</button>
                     </td>
                   </tr>)
                 })
@@ -133,7 +162,7 @@ function VendorHome() {
         
       </div>
       <div className='col-md-2 my-3'>
-<div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
+<div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
 
   <div className="card-body">
     <h5 className="card-title">Yearly Revenue</h5>

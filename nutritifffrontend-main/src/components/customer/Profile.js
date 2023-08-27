@@ -6,8 +6,10 @@ import Footer from './Footer'
 import Login from './Login';
 import { createaUrl } from '../../utils/utils';
 import bgimage4 from '../../../src/images/bg4.jpg'
+import {useHistory}  from 'react-router-dom';
 
 function Profile() {
+    const history = useHistory();
     // var user = sessionStorage.getItem("user");
     var customerId = sessionStorage.getItem("customerId");
     var isLoggedIn = sessionStorage.getItem("isLoggedIn");
@@ -46,13 +48,66 @@ function Profile() {
       helper.send(JSON.stringify(id));
   }
 
+  const edit = ()=>
+  {
+    history.push('/changeprofile')
+  }
+
+  const changepass = ()=>
+  {
+    history.push('/changepassword')
+  }
+
   if(isLoggedIn)
   {
     return (
-        <div style={{backgroundImage:`url(${bgimage4})`, backgroundAttachment:'fixed'}}>
+        <div>
+            <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
         <CustomerNavbar2/>
-        <Navbar/>
-        <h5>
+        <div className="row" style={{paddingTop:"180px"}}>
+                <div className="col-md-3"></div>
+                <div className="col-md-6">
+<div className="row">
+    <div className="col-md-6"></div>
+    <div className="col-md-6">
+    <button className="btn btn-dark btn-lg my-3 mx-3"
+            onClick={edit}>Edit Profile</button>
+    <button className="btn btn-dark btn-lg my-3 mx-3"
+            onClick={changepass}>Change Password</button>
+    </div>
+</div>
+
+            <div className="form-check">
+            <div className="container my-3">
+                <label> <h4>Name </h4></label>
+           <input className="form-control my-3" type="text" style={{height:'50px', fontSize:'20px'}}
+           value={customer.name} ></input>
+                <label><h4>Home Address</h4></label>
+           <textarea className="form-control my-3" rows="4" style={{fontSize:'20px'}}
+           value={customer.home_address} ></textarea>
+           <label><h4>Work Address</h4></label>
+           <textarea className="form-control my-3" rows="4" style={{fontSize:'20px'}}
+           value={customer.work_address} ></textarea>
+                <label><h4>Pincode</h4></label>
+            <input className="form-control my-3" type="text" style={{height:'50px', fontSize:'20px'}}
+            value={customer.pincode} ></input>
+
+                <label><h4>Email</h4></label>
+           <input className="form-control my-3" type="email" style={{height:'50px', fontSize:'20px'}}
+           value={customer.email} ></input>
+
+<label><h4>Mobile Number</h4></label>
+           <input className="form-control my-3" type="tel" style={{height:'50px', fontSize:'20px'}}
+           value={customer.mob_no}></input>
+            </div>
+          </div>
+         
+                </div>
+                <div className="col-md-3"></div>
+            </div>
+
+        {/* <h5>
             <center>
             <div className="table-responsive col-md-6 my-3">
                 <table className="table table-hover table-bordered" style={{marginTop:'75px', marginBottom:'75px'}}>
@@ -81,7 +136,7 @@ function Profile() {
                 </table>
             </div>
             </center>
-            </h5>
+            </h5> */}
             <Footer/>
         </div>
       )

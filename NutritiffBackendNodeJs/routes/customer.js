@@ -262,6 +262,18 @@ customerRouter.post('/getcustomer', (request, response) => {
   })
 })
 
+customerRouter.delete('/unlike', (request, response) => {
+  const statement = `delete from favorites where customer_id = ${request.body.customer_id} and 
+  tiffin_id = ${request.body.tiffin_id}`
+  db.query(statement, (error, data) => {
+    if (error) {
+      response.send('error')
+    } else {
+      response.send(data)
+    }
+  })
+})
+
 //11
 //update profile: /customer/updateprofile
 customerRouter.put('/updateprofile', (request, response) => {

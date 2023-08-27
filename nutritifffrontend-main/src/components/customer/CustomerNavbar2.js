@@ -13,7 +13,7 @@ const clear = ()=>
 }
 
   return (
-    <nav className="navbar navbar-expand-lg-dark navbar-dark bg-light">
+    <nav className="navbar navbar-expand-lg-dark navbar-dark bg-light fixed-top">
         <div className="container-fluid" style={{backgroundColor:'olivedrab'}}>
             <Link className="navbar-brand" to="/">              
               <img src="/images/logo.png" style={{height:75, width:90}}></img>
@@ -32,6 +32,22 @@ const clear = ()=>
 
               <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/contact">
                 <h6> Contact Us </h6>
+              </Link>
+
+              <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/favorites">
+                <h6> Favorites </h6>
+              </Link>
+
+              <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/myorders">
+                <h6> My Orders </h6>
+              </Link>
+
+              <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/myorderhistory">
+                <h6> Order History </h6>
+              </Link>
+
+              <Link className={`nav-link ${location.pathname === "/"?"active":""} mx-4`} to="/subscription">
+                <h6> My Subscription </h6>
               </Link>
 
               {/* <Link className={`nav-link ${location.pathname === "/"?"active":""} mx4`} to="/venfeedback">

@@ -5,7 +5,7 @@ function CustomerNavbar(props) {
 let location = useLocation();
 
   return (
-    <nav className="navbar navbar-expand-lg-dark navbar-dark bg-light">
+    <nav className="navbar navbar-expand-lg-dark navbar-dark bg-light fixed-top">
         <div className="container-fluid" style={{backgroundColor:'olivedrab'}}>
             <Link className="navbar-brand" to="/">              
               <img src="/images/logo.png" style={{height:75, width:90}}></img>

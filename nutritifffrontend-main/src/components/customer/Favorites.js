@@ -8,6 +8,7 @@ import { createaUrl, createUrl, log } from '../../utils/utils';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function Favorites() {
     // var user = sessionStorage.getItem("user");
@@ -96,32 +97,68 @@ const like = (tiffinId) =>
     })
   }
 
+  const remove = (tiffId)=>
+  {
+    debugger;
+    var obj = {"customer_id": customerId, "tiffin_id": tiffId}
+    var helper = new XMLHttpRequest();
+    helper.onreadystatechange = ()=>{
+      debugger
+        if (helper.readyState === 4 && helper.status === 200 )
+            {
+              debugger;
+              var result = JSON.parse(helper.responseText);
+              log(result)
+              toast.success('Tiffin removed from favorites')
+              window.location.reload();
+            }
+      };
+      const url = createaUrl('customer/unlike')
+      helper.open("DELETE", url);
+      helper.setRequestHeader("Content-Type", "application/json");
+      helper.send(JSON.stringify(obj));
+  }
+
   if(isLoggedIn)
   {
     return(
-        <>
+        <div>
+<div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
           <CustomerNavbar2/>
-          <Navbar/>
-          <>
+          <div style={{paddingTop:"180px"}}>
             <div className="container my-3">
                 <div className="row gy-3">
                   {
                     tiffins.map((tiffin) =>
                     {
-                      return <div className="col-md-3">
-                      <div className="card">
-                          <img src={tiffin.image_link} className="card-img-top" alt="..."/>
+                      return <div className="col-md-3 my-3">
+                      <div className="card h-100 bg-dark text-white" style={{borderRadius:'40px'}}>
+                          <img src={tiffin.image_link} className="card-img-top" alt="..."
+                          style={{padding:'10px', borderRadius:'40px'}}/>
                           <div className="card-body">
+                            <div className='row'>
+                              <div className='col-md-8'>
                             <h5 className="card-title">{tiffin.tiffin_name}</h5>
+                            </div>
+                            <div className='col-md-4'>
+                            <h5 className="card-title">₹ {tiffin.tiffin_price}</h5>
+                            </div>
+                            </div>
                             <p className="card-text">{tiffin.description}</p>
+                            <div className="card-footer mt-auto">
                             <center>
-                            <button type="button" className="btn btn-primary" 
+                            <button type="button" className="btn btn-success mx-3 my-3" 
                             onClick={()=>addToCart(tiffin.tiffin_id)}>
                               Add to cart</button>
-                              <button type="button" className="btn btn-danger mx-3" 
-                        onClick={()=>like(tiffin.tiffin_id)}>
-                          Like</button>
+                            <button type="button" className="btn btn-danger mx-3 my-3" 
+                            onClick={()=>like(tiffin.tiffin_id)}>
+                              Like</button>
+                              <button type="button" className="btn btn-outline-warning mx-3 my-3" 
+                            onClick={()=>remove(tiffin.tiffin_id)}>
+                              Remove</button>
                             </center>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -132,8 +169,8 @@ const like = (tiffinId) =>
                 
             </div>
             <Footer/>
-        </>
-        </>
+        </div>
+        </div>
       )
   }
   else

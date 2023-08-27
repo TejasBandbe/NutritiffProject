@@ -6,7 +6,7 @@ import Footer from './Footer';
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomerNavbar2 from './CustomerNavbar2';
-import Navbar from './Navbar';
+import bgimage4 from '../../../src/images/bg4.jpg'
 
 function Subscription() {
     // var user = sessionStorage.getItem("user");
@@ -16,6 +16,7 @@ function Subscription() {
     const [subs, setSubs] = useState([]);
   const [sub, setSub] = useState({purchase_id: 0, status: "", name: "",
                             description: "", price: 0.0, no_of_meals: 0, transaction_id: ""});
+  const [status, setStatus] = useState('')
 
     useEffect(()=>{
     console.log("Inside Component Did Mount")
@@ -39,6 +40,7 @@ function Subscription() {
               debugger;
               var result = JSON.parse(helper.responseText);
               setSubs(result);
+              setStatus(result[0].status)
             }
       };
       const url = createaUrl('customer/getsubscription')
@@ -46,18 +48,42 @@ function Subscription() {
       helper.setRequestHeader("Content-Type", "application/json");
       helper.send(JSON.stringify(id));
   }
+
+  const cancel = ()=>
+  {
+    toast.success("Plan canceled")
+    setStatus('inactive')
+  }
+
+  const active = ()=>
+  {
+    toast.success("Plan activated")
+    setStatus('active')
+  }
+
+  const buy = ()=>
+  {
+    toast.error("You already have one subscription plan")
+  }
                                   
 
   if(isLoggedIn)
   {
     return(
         <div>
+           <div style={{backgroundImage:`url(${bgimage4})`, 
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
             <CustomerNavbar2/>
-            <Navbar/>
 
-            <div className="row my-3">
+            <div className="row my-3" style={{paddingTop:"180px"}}>
       <div className="col-md-3"></div>
       <div className="col-md-6">
+      <div className="row">
+    <div className="col-md-9"></div>
+    <div className="col-md-3">
+    <button className="btn btn-dark btn-lg my-3 mx-3" onClick={buy}>Buy Subscription</button>
+    </div>
+</div>
         <div style={{backgroundColor:'white'}}>
         <h2 style={{textAlign:'center', marginTop:'15px', padding:'10px'}}>My Subscriptions</h2>
         </div>
@@ -87,10 +113,10 @@ function Subscription() {
                     <td>{sub.transaction_id}</td>
                     <td>{sub.status}</td>
                     <td>
-                        {sub.status === 'active' ? (
-                            <button className="btn btn-danger">Cancel plan</button>
+                        {status === 'active' ? (
+                            <button className="btn btn-danger" onClick={cancel}>Cancel plan</button>
                         ):(
-                            <button className="btn btn-success">Active Plan</button>
+                            <button className="btn btn-success" onClick={active}>Active Plan</button>
                         )}
                     </td>
                   </tr>)
@@ -103,7 +129,7 @@ function Subscription() {
         
       </div>
       <div className="col-md-3">
-        <button className='btn btn-primary'>Buy Subscription</button>
+        
       </div>
       </div>
 

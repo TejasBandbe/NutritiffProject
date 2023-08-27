@@ -197,11 +197,10 @@ function AdminHome() {
       <AdminNavbar/>
 
 <div className='row' style={{paddingTop:"180px"}}>
-<div className='col-md-2 my-3'>
-    {/* <h4>Monthly revenue</h4>
-<div style={{border:'1px solid black', height:'40px'}}></div> */}
 
-<div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
+<div className='col-md-2'>
+
+<div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
     <h5 className="card-title">Monthly Revenue</h5>
     <h6 className="card-title">Current Month</h6>
@@ -212,7 +211,7 @@ function AdminHome() {
   </div>
 </div>
 
-<div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
+<div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
     <h5 className="card-title">Monthly Revenue</h5>
     <input type="number" id="input" value=""/>
@@ -223,61 +222,45 @@ function AdminHome() {
   </div>
 </div>
 
-  </div>
-  <div className='col-md-8'>
-      <div id="carouselExample" className="carousel slide">
-  <div className="carousel-inner">
-    <div className="carousel-item active">
-      <img src={image1} style={{height:'400px'}} className="d-block w-100" alt="..."/>
-      </div>
-    <div className="carousel-item">
-      <img src={image2} style={{height:'400px'}} className="d-block w-100" alt="..."/>
-    </div>
-    <div className="carousel-item">
-      <img src={image3} style={{height:'400px'}} className="d-block w-100" alt="..."/>
-    </div>
-  </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
-  </div>
 </div>
-<div className='col-md-2'>
 
-<div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
+<div className="col-md-8">
+
+  <div className='row'>
+    <div className='col'>
+    <div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
-    <h5 className="card-title">Yearly Revenue</h5>
-    <h6 className="card-title">Current year</h6>
-    <h1 className="card-text">₹ {r3+rev3}</h1>
+    <h5 className="card-title"><center>Vendors count</center></h5>
+    <h1 className="card-text"> <center>17</center> </h1>
     <center>
     <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
   </div>
 </div>
-
-<div className="card mx-3 my-5" style={{backgroundColor:'olivedrab', color:'white'}}>
+    </div>
+    <div className='col'>
+    <div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
-    <h5 className="card-title">Yearly Revenue</h5>
-    <input type="number" id="input" value=""/>
-    <h1 className="card-text">₹ {r4+rev4}</h1>
+    <h5 className="card-title"><center>Customers count</center></h5>
+    <h1 className="card-text"> <center>320</center> </h1>
     <center>
-    <Link to="#" className="card-link" style={{color:'white'}}>Get Revenue</Link>
+    <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
   </div>
 </div>
-
+    </div>
+    <div className='col'>
+    <div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
+  <div className="card-body">
+    <h5 className="card-title"><center>Tiffins count</center></h5>
+    <h1 className="card-text"><center>47</center></h1>
+    <center>
+    <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
+    </center>
+  </div>
 </div>
-</div>
-
-      {/* <h2 style={{textAlign:'center', marginTop:'15px'}}>Pending Approval Requests</h2> */}
-      <div className="row my-3">
-      <div className="col-md-3"></div>
-      <div className="col-md-6">
+    </div>
+  </div>
         <div style={{backgroundColor:'white'}}>
         <h2 style={{textAlign:'center', marginTop:'15px', padding:'10px'}}>Pending Approval Requests</h2>
         </div>
@@ -320,8 +303,35 @@ function AdminHome() {
         </div>
         
       </div>
-      <div className="col-md-3"></div>
-      </div>
+
+ 
+<div className='col-md-2'>
+
+<div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
+  <div className="card-body">
+    <h5 className="card-title">Yearly Revenue</h5>
+    <h6 className="card-title">Current year</h6>
+    <h1 className="card-text">₹ {r3+rev3}</h1>
+    <center>
+    <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
+    </center>
+  </div>
+</div>
+
+<div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
+  <div className="card-body">
+    <h5 className="card-title">Yearly Revenue</h5>
+    <input type="number" id="input" value=""/>
+    <h1 className="card-text">₹ {r4+rev4}</h1>
+    <center>
+    <Link to="#" className="card-link" style={{color:'white'}}>Get Revenue</Link>
+    </center>
+  </div>
+</div>
+
+</div>
+</div>
+
       <Footer/>
       </div>
     
