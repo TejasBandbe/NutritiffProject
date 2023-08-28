@@ -8,7 +8,7 @@ function CustomerAboutUs() {
   var isLoggedIn = sessionStorage.getItem("isLoggedIn");
   const containerStyle = {
     width: "100%",
-    height: "100vh",
+    height: "130vh",
     position: "relative",
     paddingTop: "180px",
   };
@@ -58,7 +58,7 @@ function CustomerAboutUs() {
           <br />
           <br />
           <br />
-          <br />
+          
           <h1> About Us</h1>
           <br />
           <p style={{ fontSize: "18px", fontFamily: "-moz-initial" }}>
@@ -126,7 +126,7 @@ function CustomerAboutUs() {
           <br />
           <br />
           <br />
-          <br />
+         
           <h1> About Us</h1>
           <br />
           <p style={{ fontSize: "18px", fontFamily: "-moz-initial" }}>

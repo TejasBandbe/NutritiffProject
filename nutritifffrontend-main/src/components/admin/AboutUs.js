@@ -8,7 +8,7 @@ function AboutUs() {
   var isLoggedIn = sessionStorage.getItem("adminLoggedIn");
   const containerStyle = {
     width: "100%",
-    height: "100vh",
+    height: "110vh",
     position: "relative",
     paddingTop: "180px",
   };
@@ -56,18 +56,15 @@ function AboutUs() {
           <br />
           <br />
           <br />
-          <br />
-          <br />
-          <br />
-          <h1> About Us</h1>
+          <h1> <b>About Us</b></h1>
           <br />
           <p style={{ fontSize: "18px", fontFamily: "-moz-initial" }}>
-            "Welcome to NutriTiff, Where Taste Meets Convenience! Experience
+           <b> "Welcome to NutriTiff, Where Taste Meets Convenience! Experience
             delicious and wholesome tiffin delivery, tailored to nourish your busy
-            lifestyle."
+            lifestyle." </b>
           </p>
           <br />
-          <h2>Why Choose Us?</h2>
+          <h2><b>Why Choose Us?</b></h2>
   
           <ul>
             <li style={{ fontSize: "17px", fontFamily: "-moz-initial" }}>
