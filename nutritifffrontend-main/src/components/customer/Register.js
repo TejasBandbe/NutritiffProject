@@ -4,6 +4,7 @@ import { log, createUrl } from "../../utils/utils";
 import "./styles.css";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import bgimage from '../../../src/images/img1.jpg'
 
 function Register() {
 
@@ -62,8 +63,10 @@ function Register() {
     };
 
   return (
-    <div className="app">
-      <div className="login-form"  style={{width:'500px'}}>
+    <div className="app" style={{backgroundImage:`url(${bgimage})`, 
+    backgroundAttachment:'fixed', backgroundSize:'cover', content:"", 
+    position:'fixed',width:'100%',height:'100%',backgroundRepeat:'no-repeat'}}>
+      <div className="login-form"  style={{width:'500px', backgroundColor:"lightgray"}}>
         <div className="title"> <center>Register</center></div>
           <div className="form">
               <form onSubmit={customerregister}>
@@ -73,11 +76,11 @@ function Register() {
                 </div>
                 <div className="input-container">
                   <label>Home Address</label>
-                  <input type="text" name="haddress" required />
+                  <input type="text" name="haddress" required style={{height:"50px"}}/>
                 </div>
                 <div className="input-container">
                   <label>Work Address</label>
-                  <input type="text" name="waddress" required />
+                  <input type="text" name="waddress" required style={{height:"50px"}}/>
                 </div>
                 <div className="input-container">
                   <label>Pincode</label>
@@ -100,7 +103,10 @@ function Register() {
                   <input type="password" name="cnfpass" required />
                 </div>
                 <div className="button-container">
-                  <input type="submit" value="Register"/>
+                  <input type="submit" value="Register" style={{background:'gray',
+                  borderColor:'black',borderRadius:10,height:'30px',width:'100px',
+                  display:'flex',justifyContent:'center',alignContent:'center',
+                  flexdirection:'row',flexWrap:'wrap'}}/>
                 </div>
                 <center>
                 <p className="forgot-password text-right my-3">

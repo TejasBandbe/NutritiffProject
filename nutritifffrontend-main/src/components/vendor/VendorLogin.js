@@ -4,6 +4,7 @@ import "./styles.css";
 import { createaUrl, log } from "../../utils/utils";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import bgimage from '../../../src/images/img1.jpg'
 
 function VendorLogin() {
   const history = useHistory();
@@ -50,9 +51,10 @@ function VendorLogin() {
 
 debugger;
   return (
-    
-    <div className="app">
-      <div className="login-form"> 
+    <div className="app" style={{backgroundImage:`url(${bgimage})`, 
+    backgroundAttachment:'fixed', backgroundSize:'cover', content:"", 
+    position:'fixed',width:'100%',height:'100%',backgroundRepeat:'no-repeat'}}>
+      <div className="login-form" style={{backgroundColor:"lightgray"}}> 
         <div className="title"> <center>Vendor Sign In</center> </div>
           <div className="form">
               <form onSubmit={vendorlogin}>
@@ -65,7 +67,10 @@ debugger;
                   <input type="password" name="pass" required />
                 </div>
                 <div className="button-container">
-                  <input type="submit" value="Login"/>
+                  <input type="submit" value="Login" style={{background:'gray',
+                  borderColor:'black',borderRadius:10,height:'30px',width:'100px',
+                  display:'flex',justifyContent:'center',alignContent:'center',
+                  flexdirection:'row',flexWrap:'wrap'}}/>
                 </div>
                 <center>
                 <p className="forgot-password text-right my-3">

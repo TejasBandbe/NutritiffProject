@@ -65,6 +65,11 @@ function MyTiffins() {
       history.push('/addtiffin')
     }
 
+    const unavailable = ()=>
+    {
+      toast.success("Marked as not available")
+    }
+
     if(isLoggedIn)
     {
         return (
@@ -98,12 +103,16 @@ function MyTiffins() {
                         <p className="card-text">{tiffin.description}</p>
                         <div className="card-footer mt-auto">
                         <center>
-                        <button type="button" className="btn btn-success mx-3" 
+                        <button type="button" className="btn btn-success mx-3 my-3" 
                         onClick={()=>edit(tiffin.tiffin_id)}>
                           Edit</button>
-                        <button type="button" className="btn btn-danger mx-3"
+                        <button type="button" className="btn btn-danger mx-3 my-3"
                         onClick={remove}>
                           Remove</button>
+
+                          <button type="button" className="btn btn-warning mx-3"
+                        onClick={unavailable}>
+                          Mark as not available</button>
                         </center>
                         </div>
                       </div>
