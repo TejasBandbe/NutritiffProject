@@ -41,7 +41,7 @@ function AdminLogin() {
                 }
                 else
                 {
-                  toast.error("Invalid password")
+                  // toast.error("Invalid password")
                 }
         };
         const url = createUrl('api/admins/login')

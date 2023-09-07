@@ -2,7 +2,6 @@ const express = require('express')
 const customerRouter = express.Router()
 const db = require('../db')
 
-
 //1
 //To login the customer
 //   /customer/login

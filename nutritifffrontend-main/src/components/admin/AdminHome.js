@@ -28,6 +28,7 @@ function AdminHome() {
     const [rev2, setRev2] = useState(0.0)
     const [rev3, setRev3] = useState(0.0)
     const [rev4, setRev4] = useState(0.0)
+    const [vencount, setVencount] = useState('')
 
     useEffect(()=>{
       console.log("Inside Component Did Mount")
@@ -40,7 +41,7 @@ function AdminHome() {
     useEffect(()=>
   {
       console.log("Component Did Update is called..")
-  }, [vendors, vendor, r1, r2, r3, r4]);
+  }, [vendors, vendor, r1, r2, r3, r4, vencount]);
 
   const getApprovalRequests = async() =>
   {
@@ -51,6 +52,7 @@ function AdminHome() {
       debugger
       log(res.data)
       setVendors(res.data)
+      setVencount(10)
     })
   }
 
@@ -186,13 +188,19 @@ function AdminHome() {
       helper.send();
   }
 
+  const incvendor = ()=>
+  {
+    setVencount(11);
+  }
+
     if(isLoggedIn)
     {
   return (
     // <div style={{backgroundColor:'#bbe9ee'}}>
      <div>
       <div style={{backgroundImage:`url(${bgimage4})`, 
-    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',height:'100%',zIndex:-1,opacity:0.5}}></div>
+    backgroundAttachment:'fixed', content:"",position:'fixed',width:'100%',
+    height:'100%',zIndex:-1,opacity:0.5}}></div>
  
       <AdminNavbar/>
 
@@ -231,9 +239,9 @@ function AdminHome() {
     <div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
     <h5 className="card-title"><center>Vendors count</center></h5>
-    <h1 className="card-text"> <center>17</center> </h1>
+    <h1 className="card-text"> <center>{vencount}</center> </h1>
     <center>
-    <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
+    <Link to="#" onClick={incvendor} className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
   </div>
 </div>
@@ -242,7 +250,7 @@ function AdminHome() {
     <div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
     <h5 className="card-title"><center>Customers count</center></h5>
-    <h1 className="card-text"> <center>320</center> </h1>
+    <h1 className="card-text"> <center>15</center> </h1>
     <center>
     <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
@@ -253,7 +261,7 @@ function AdminHome() {
     <div className="card mx-3 my-5 bg-dark" style={{backgroundColor:'olivedrab', color:'white'}}>
   <div className="card-body">
     <h5 className="card-title"><center>Tiffins count</center></h5>
-    <h1 className="card-text"><center>47</center></h1>
+    <h1 className="card-text"><center>32</center></h1>
     <center>
     <Link to="#" className="card-link" style={{color:'white'}}>Refresh</Link>
     </center>
