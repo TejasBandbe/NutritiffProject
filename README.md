@@ -2,7 +2,8 @@
 
 1. Install node and node package manager
 2. Install mysql and mysql workbench
-3. Install Visual studio code 2019 or 2022
+3. Install Visual studio 2019 or 2022
+4. Install VS code
 
 # Download the zip file in local macine OR git clone the git url in cmd
 
